@@ -1,0 +1,34 @@
+/IronFilter/det/setSource_radius 1.7 cm
+/IronFilter/det/setFeCapHeight 17.0 cm   # 
+/IronFilter/det/setmoderatorRadius 15.0 cm
+/IronFilter/det/setshieldRadius 20.0 cm
+/IronFilter/det/setshieldCapHeight 5.0 cm
+/IronFilter/det/setFe_Height 41.0 cm    #
+/IronFilter/det/setAl_Height 39.0 cm
+/IronFilter/det/setFe_Height_2 30.0 cm
+/IronFilter/det/setreflectorRadius 16.0 cm
+
+/run/initialize
+/tracking/verbose 0
+/control/getEnv SEED
+
+/random/setSeeds 8466 1187
+
+/process/list
+/run/printProgress 100000
+
+/gps/particle neutron
+/gps/energy 14.1 MeV
+/gps/position 0 0 46.0 cm   #add all the heights/2.0-DD_Height-0.5  i.e. (5+20+34+39+30+1)/2.0-20-0.5
+#/gps/position 0 0 53 cm
+#/gps/position 0 0 44 cm
+#/gps/ang/type iso
+
+
+#/analysis/setFileName 24Filter_test_air1_1
+/analysis/setFileName Filter_Cap_2_FeI_41_{SEED}   # named based on the parameters you vary 
+/run/beamOn 10000000
+/run/initialize
+
+
+

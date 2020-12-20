@@ -1,0 +1,17 @@
+/run/initialize
+/tracking/verbose 0
+/control/getEnv SEED
+
+/random/setSeeds 1233 4388
+
+/process/list
+/run/printProgress 1
+
+/gps/particle neutron
+/gps/energy 14.1 MeV
+/gps/position 0 0 45 cm
+/gps/ang/type iso
+
+
+/analysis/setFileName testgeantino_{SEED}
+/run/beamOn 10

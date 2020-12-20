@@ -1,0 +1,30 @@
+#/IronFilter/det/setMultiplierLeadHeightRear 20.0 cm
+#/IronFilter/det/setMultiplierLeadHeightFront 15.0 cm
+#/IronFilter/det/setModeratorAluminumHeight 30 cm
+#/IronFilter/det/setModeratorTitaniumHeight 5.0 cm
+#/IronFilter/det/setMultiplierLeadRadius 15.0 cm
+#/IronFilter/det/setModeratorAluminumRadius 15.0 cm
+#/IronFilter/det/setModeratorTitaniumRadius 15.0 cm
+#/IronFilter/det/setPolyHeight 41.0 cm
+#/IronFilter/det/setFilterCellSpacing 50.0 cm
+
+
+/run/initialize
+/tracking/verbose 1
+#/control/getEnv SEED
+
+/random/setSeeds 1233 4388
+
+/process/list
+
+
+/gps/particle geantino
+/gps/position 0 0 0 cm
+/gps/direction 0 1 0
+#/gps/position 0 0 100 cm
+#/gps/direction 0 0 -1
+
+
+#/analysis/setFileName testgeantino_{SEED}
+/analysis/setFileName testgeantino
+/run/beamOn 1

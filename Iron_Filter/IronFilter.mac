@@ -1,0 +1,14 @@
+/run/initialize
+/run/verbose 1
+/random/setSeeds 238009 238117
+
+/gps/particle neutron
+/gps/pos/centre 0 0 -100 mm
+/gps/ene/type Mono
+/gps/ene/mono 24 keV
+/gps/ang/type iso
+
+/analysis/setFileName iron_filter_test
+/tracking/verbose 0
+/run/printProgress 1
+/run/beamOn 10000

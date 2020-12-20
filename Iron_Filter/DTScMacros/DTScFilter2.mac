@@ -1,0 +1,52 @@
+#/IronFilter/det/setSource_radius 1.0 cm  #this denotes the length of the LiF layer
+#/IronFilter/det/setFeCapHeight 20.0 cm #dd height
+#/IronFilter/det/setmoderatorRadius 15 cm     #7.5 cm
+#/IronFilter/det/setshieldRadius 20.0 cm
+#/IronFilter/det/setshieldCapHeight 15.0 cm #this denotes the amount of lead that we should have in between DT and fluental
+#/IronFilter/det/setFe_Height 30.0 cm  #donot add this in gps 
+#/IronFilter/det/setAl_Height 30.0 cm #39.0 cm
+##/IronFilter/det/setFe_Height_2 27.0 cm
+#/IronFilter/det/setreflectorRadius 1.0 cm #denotes the thickness of the titanium layer 
+
+
+/IronFilter/det/setSource_radius 1.0 cm  #this denotes the length of the LiF layer
+/IronFilter/det/setFeCapHeight 15.0 cm #this denotes the amount of lead that we should have in between DT and fluental
+/IronFilter/det/setmoderatorRadius 15 cm     #7.5 cm
+/IronFilter/det/setshieldRadius 20.0 cm
+/IronFilter/det/setshieldCapHeight 20.0 cm #dd_height
+/IronFilter/det/setFe_Height 35.0 cm  #donot add this in gps #scandium Height
+/IronFilter/det/setAl_Height 20.0 cm #39.0 cm
+/IronFilter/det/setFe_Height_2 20.0 cm #FeModerator Height
+/IronFilter/det/setreflectorRadius 1.0 cm #denotes the thickness of the titanium layer 
+
+/run/initialize
+/tracking/verbose 0
+/control/getEnv SEED
+/control/getEnv a
+/control/getEnv b
+
+/random/setSeeds {a} {b}
+#/random/setSeeds 8426 1347
+
+/process/list
+/run/printProgress 100000
+
+/gps/particle neutron
+/gps/energy 14.1 MeV
+#/gps/position 0 0 7.5 cm   #add all the heights/2.0-DD_Height-0.5  i.e. (20+15+20+20)/2.0-20-0.5
+/gps/position 0 0 17.0 cm
+#/gps/position 0 0 12.5 cm
+#/gps/position 0 0 53 cm
+#/gps/position 0 0 44 cm
+/gps/ang/type iso
+
+
+#/analysis/setFileName 24Filter_test_air1_1 
+#/analysis/setFileName PbFLuFe_15_20_40_IronsurrPoly_files_{SEED}_{a}_{b}   # name based on the parameters you vary 
+#/analysis/setFileName PbFeSc_15_30_35_3_5_ScsurrPoly_files_{SEED}_{a}_{b} 
+/analysis/setFileName PbFluFeSc_15_20_20_35_3_5_ScsurrPoly_files_{SEED}_{a}_{b}
+/run/beamOn 10000000   #10000000
+/run/initialize
+
+
+

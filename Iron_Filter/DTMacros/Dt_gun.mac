@@ -1,0 +1,17 @@
+/run/initialize
+/tracking/verbose 0
+
+/random/setSeeds 3257 8497
+
+/process/list
+/run/printProgress 10000
+
+#/gps/particle neutron
+#/gps/energy 14.1 MeV
+#/gps/position 0 0 49 cm
+#/gps/ang/type iso
+
+
+/analysis/setFileName DTAngled_gun
+/run/beamOn 100000
+

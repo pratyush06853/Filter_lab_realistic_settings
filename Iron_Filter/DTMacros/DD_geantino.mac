@@ -1,12 +1,12 @@
-#/IronFilter/det/setMultiplierLeadHeightRear 20.0 cm
-#/IronFilter/det/setMultiplierLeadHeightFront 15.0 cm
-#/IronFilter/det/setModeratorAluminumHeight 30 cm
-#/IronFilter/det/setModeratorTitaniumHeight 5.0 cm
-#/IronFilter/det/setMultiplierLeadRadius 15.0 cm
-#/IronFilter/det/setModeratorAluminumRadius 15.0 cm
-#/IronFilter/det/setModeratorTitaniumRadius 15.0 cm
-#/IronFilter/det/setPolyHeight 41.0 cm
-#/IronFilter/det/setFilterCellSpacing 50.0 cm
+/IronFilter/det/setMultiplierLeadHeightRear 20.0 cm
+/IronFilter/det/setMultiplierLeadHeightFront 15.0 cm
+/IronFilter/det/setModeratorAluminumHeight 30 cm
+/IronFilter/det/setModeratorTitaniumHeight 5.0 cm
+/IronFilter/det/setMultiplierLeadRadius 15.0 cm
+/IronFilter/det/setModeratorAluminumRadius 15.0 cm
+/IronFilter/det/setModeratorTitaniumRadius 15.0 cm
+/IronFilter/det/setPolyHeight 41.0 cm
+/IronFilter/det/setFilterCellSpacing 50.0 cm
 
 
 /run/initialize

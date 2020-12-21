@@ -24,7 +24,7 @@
 /gps/particle neutron
 /gps/energy 14.1 MeV
 #/gps/position 0 0 7.5 cm   #add all the heights/2.0-DD_Height-0.5  i.e. (20+15+30+5)/2.0-20-0.5
-/gps/position 0 0 141 cm
+/gps/position 0 141 0 cm
 /gps/ang/type iso
 
 

@@ -30,6 +30,7 @@
 
 #include "IronFilterDetectorConstruction.hh"
 #include "IronFilterActionInitialization.hh"
+#include "IronFilterPhysicsList.hh"
 
 #ifdef G4MULTITHREADED
 #include "G4MTRunManager.hh"
@@ -67,7 +68,7 @@ int main(int argc,char** argv)
     PrintUsage();
     return 1;
   }
-  
+
   G4String macro;
   G4String session;
 #ifdef G4MULTITHREADED
@@ -85,8 +86,8 @@ int main(int argc,char** argv)
       PrintUsage();
       return 1;
     }
-  }  
-  
+  }
+
   // Detect interactive mode (if no macro provided) and define UI session
   //
   G4UIExecutive* ui = 0;
@@ -97,14 +98,14 @@ int main(int argc,char** argv)
   // Choose the Random engine
   //
   G4Random::setTheEngine(new CLHEP::RanecuEngine);
-  
+
   // Construct the default run manager
   //
 #ifdef G4MULTITHREADED
   G4MTRunManager * runManager = new G4MTRunManager;
-  if ( nThreads > 0 ) { 
+  if ( nThreads > 0 ) {
     runManager->SetNumberOfThreads(nThreads);
-  }  
+  }
 #else
   G4RunManager * runManager = new G4RunManager;
 #endif
@@ -114,13 +115,16 @@ int main(int argc,char** argv)
   IronFilterDetectorConstruction* detConstruction = new IronFilterDetectorConstruction();
   runManager->SetUserInitialization(detConstruction);
 
-  G4VModularPhysicsList* physicsList = new Shielding;
+  //G4VModularPhysicsList* physicsList = new Shielding;
+  //runManager->SetUserInitialization(physicsList);
+  IronFilterPhysicsList* physicsList = new IronFilterPhysicsList;
+  physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
-    
+
   IronFilterActionInitialization* actionInitialization
      = new IronFilterActionInitialization(detConstruction);
   runManager->SetUserInitialization(actionInitialization);
-  
+
   // Initialize visualization
   G4VisManager* visManager = new G4VisExecutive;
   // G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
@@ -137,7 +141,7 @@ int main(int argc,char** argv)
     G4String command = "/control/execute ";
     UImanager->ApplyCommand(command+macro);
   }
-  else  {  
+  else  {
     // interactive mode : define UI session
     UImanager->ApplyCommand("/control/execute init_vis.mac");
     if (ui->IsGUI()) {
@@ -149,7 +153,7 @@ int main(int argc,char** argv)
 
   // Job termination
   // Free the store: user actions, physics_list and detector_description are
-  // owned and deleted by the run manager, so they should not be deleted 
+  // owned and deleted by the run manager, so they should not be deleted
   // in the main() program !
 
   delete visManager;

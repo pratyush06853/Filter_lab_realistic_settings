@@ -42,6 +42,7 @@
 #include "G4Sphere.hh"
 #include "G4LogicalVolume.hh"
 #include "G4RotationMatrix.hh"
+#include "G4NeutronHPThermalScatteringNames.hh"
 #include "G4PVPlacement.hh"
 #include "G4PVReplica.hh"
 #include "G4AutoDelete.hh"
@@ -206,9 +207,15 @@ void IronFilterDetectorConstruction::DefineMaterials()
    //Co
    G4Material* NatCo = new G4Material("NatCo", z = 27.0, a = 	58.933*g/mole, density = 8.86*g/cm3);
 
+   G4Element *TS_H = new G4Element("TS_H_of_Polyethylene", "H", 1, 1.007*g/mole);
 
    G4Material* air=NistMgr->FindOrBuildMaterial("G4_AIR");
-   G4Material* water=NistMgr->FindOrBuildMaterial("G4_WATER");
+   //G4Material* water=NistMgr->FindOrBuildMaterial("G4_WATER");
+
+   //Water
+   G4Material* water = new G4Material("water", density= 1.00 * g / cm3,nComponents= 2, kStateLiquid, 296*kelvin);
+   water->AddElement(TS_H,2);//pratyush
+   water->AddElement(elO,1);//pratyush
 
   //Lithium6_Fluoride
   G4Material* Li6F = new G4Material("Li6F", density= 2.54 * g / cm3,nComponents= 2);
@@ -259,7 +266,7 @@ void IronFilterDetectorConstruction::DefineMaterials()
   G4Material* boratedPoly = new G4Material( "boratedPoly", density=1.19*g/cm3, nComponents=3);
   boratedPoly->AddMaterial( NatB, 5.*perCent );
   boratedPoly->AddMaterial( NatC, 81.4*0.95*perCent );
-  boratedPoly->AddMaterial( NatH, 18.6*0.95*perCent );
+  boratedPoly->AddMaterial(NatH, 18.6*0.95*perCent );
 
 
 

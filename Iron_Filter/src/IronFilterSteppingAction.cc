@@ -87,28 +87,28 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
            flag=1;
         }
         else if(volume == fDetConstruction->GetTestREARSIDEPV()){
-           test_volumeID = 1;
+           test_volumeID = 2;
            flag=1;
         }
         else if(volume == fDetConstruction->GetTestRIGHTSIDEPV()){
-         test_volumeID = 4;
+         test_volumeID = 3;
          flag=1;
         }
         else if(volume == fDetConstruction->GetTestLEFTSIDEPV()){
-          test_volumeID = 5;
+          test_volumeID = 4;
           flag=1;
         }
         else if(volume == fDetConstruction->GetTestBOTTOMPV()){
-         test_volumeID = 6;
+         test_volumeID = 5;
          flag=1;
         }
         else if(volume == fDetConstruction->GetTestTOPPV()){
-          test_volumeID = 7;
+          test_volumeID = 6;
           flag=1;
         }
         else {
           test_volumeID =8;
-          flag=1;
+          flag=0;
         }
 
         //way to kill particle less than a predefined energy to speed up thre simulation.

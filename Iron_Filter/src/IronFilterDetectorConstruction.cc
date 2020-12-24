@@ -227,17 +227,33 @@ void IronFilterDetectorConstruction::DefineMaterials()
   Borax->AddMaterial(NatH,5.29*perCent);//20
   Borax->AddMaterial(NatO,71.32*perCent);//17
 
+  //Boric Acid https://www.convertunits.com/molarmass/Boric+Acid
+  G4Material* boric_acid = new G4Material("boric_acid", density= 1.44* g / cm3,nComponents= 3); //pratyush
+  boric_acid->AddMaterial(NatH,4.890*perCent);//3
+  boric_acid->AddMaterial(NatB,17.484*perCent);//1
+  boric_acid->AddMaterial(NatO,77.626*perCent);//3
+
   //Borax_water_Mixture(5.8% solubity of borax https://omsi.edu/sites/all/FTP/files/kids/Borax-msds.pdf)
   //mixture of 5.5% Borax and 94.5% of Water
   G4Material* borax_water = new G4Material( "borax_water",density= 0.9868*g/cm3, nComponents= 2); //pratyush
   borax_water->AddMaterial( Borax, 5.5*perCent );  //pratyush
   borax_water->AddMaterial( water, 94.5*perCent ); //pratyush
 
+
+  //Borax_BoricAcid_buffer(https://www.researchgate.net/publication/244069630_Preparation_of_highly_concentrated_aqueous_solution_of_sodium_borate)
+  //mixture of 20g BoricAcid, 25g of Borax and 100g of water
+  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3);
+  borax_boricacid_buffer->AddMaterial( boric_acid, 13.7*perCent );//pratyush
+  borax_boricacid_buffer->AddMaterial( Borax, 17.2*perCent );//pratyush
+  borax_boricacid_buffer->AddMaterial( water, 69.1*perCent );//pratyush
+
   //Fluental
   //mixture of 40% Al and 60% of AlF_3
   G4Material* fluental = new G4Material( "fluental",density= 2.94*g/cm3, nComponents= 2); //pratyush
   fluental->AddMaterial( AlF3, 60.*perCent );  //pratyush
   fluental->AddElement( elAl, fractionMass = 40.*perCent ); //pratyush
+
+
 
   //polyethyleneBorated
   G4Material* boratedPoly = new G4Material( "boratedPoly", density=1.19*g/cm3, nComponents=3);
@@ -265,6 +281,7 @@ G4VPhysicalVolume* IronFilterDetectorConstruction::DefineVolumes()
   G4Material* Sulphur = G4Material::GetMaterial("NatS");
   G4Material* Fluental = G4Material::GetMaterial("fluental");
   G4Material* BoraxWater = G4Material::GetMaterial("borax_water");
+  G4Material* BoraxBoricAcidBuffer = G4Material::GetMaterial("borax_boricacid_buffer");
   G4Material* Lithium6_Fluoride = G4Material::GetMaterial("Li6F");
   G4Material* Lead = G4Material::GetMaterial("Pb");
   G4Material* BoratedPoly = G4Material::GetMaterial("boratedPoly");
@@ -361,7 +378,8 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   G4VSolid* Main_S = new G4Box("Main_solid", Water_x/2.0, Water_y/2.0, Water_z/2.0);
   G4VSolid* hole_S = new G4Box("hole_solid", Poly_a/2.0 , Poly_a/2.0, NeutronFilter_length/2.0);
   G4SubtractionSolid* boratedwater_S= new G4SubtractionSolid("boratedwater", Main_S, hole_S, turnAlongX, G4ThreeVector(0., Water_y/2.0-Water_rear_side-NeutronFilter_length/2.0, 0.));
-  G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxWater, "boratedwater");
+  //G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxWater, "boratedwater");
+  G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxBoricAcidBuffer, "boratedwater");
   boratedwater_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing+Water_y/2.0, 0), boratedwater_LV, "BoratedWater", vacuum_solid_LV, false, 0, fCheckOverlaps);
   boratedwater_LV->SetVisAttributes(G4VisAttributes(G4Colour::Cyan()));
 

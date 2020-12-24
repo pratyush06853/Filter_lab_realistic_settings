@@ -183,22 +183,28 @@ void IronFilterDetectorConstruction::DefineMaterials()
   new G4Material("NatTi", z = 22.0, a = 47.867*g/mole, density = 4.507*g/cm3);
 
   //Natural Boron
-  G4Material* NatB = new G4Material("NatB", z = 5.0, a = 10.811*g/mole, density = 2.37*g/cm3);
+  //G4Material* NatB = new G4Material("NatB", z = 5.0, a = 10.811*g/mole, density = 2.37*g/cm3);
+  G4Element* NatB=NistMgr->FindOrBuildElement("B");
 
   //Natural Carbon
-  G4Material* NatC = new G4Material("NatC", z = 6.0, a = 12.0107*g/mole, density = 1.95*g/cm3);
+  //G4Material* NatC = new G4Material("NatC", z = 6.0, a = 12.0107*g/mole, density = 1.95*g/cm3);
+  G4Element* NatC=NistMgr->FindOrBuildElement("C");
 
   //Natural Hydrogen
-  G4Material* NatH = new G4Material("NatH", z = 1.0, a = 1.00784*g/mole, density = 0.0008999*g/cm3);
+  //G4Material* NatH = new G4Material("NatH", z = 1.0, a = 1.00784*g/mole, density = 0.0008999*g/cm3);
+  G4Element* NatH=NistMgr->FindOrBuildElement("H");
 
   //Natural Oxygen
-  G4Material* NatO = new G4Material("NatO", z = 8.0, a = 15.999*g/mole, density = 0.001141*g/cm3);
+  //G4Material* NatO = new G4Material("NatO", z = 8.0, a = 15.999*g/mole, density = 0.001141*g/cm3);
+  G4Element* NatO=NistMgr->FindOrBuildElement("O");
 
   //Natural Oxygen
-  G4Material* NatNa = new G4Material("NatNa", z = 11.0, a = 22.989*g/mole, density = 0.968*g/cm3);
+  //G4Material* NatNa = new G4Material("NatNa", z = 11.0, a = 22.989*g/mole, density = 0.968*g/cm3);
+  G4Element* NatNa=NistMgr->FindOrBuildElement("Na");
 
    //Natural Sulphur
-   G4Material* NatS = new G4Material("NatS", z = 16.0, a = 32.065*g/mole, density = 1.92*g/cm3);
+   //G4Material* NatS = new G4Material("NatS", z = 16.0, a = 32.065*g/mole, density = 1.92*g/cm3);
+   G4Element* NatS=NistMgr->FindOrBuildElement("S");
 
    //Ni60
    G4Material* Ni60 = new G4Material("Ni60", z = 28.0, a = 59.9307864*g/mole, density = 8.9*g/cm3);
@@ -229,16 +235,16 @@ void IronFilterDetectorConstruction::DefineMaterials()
 
   //Aluminum Fluoride
   G4Material* Borax = new G4Material("Borax", density= 0.76* g / cm3,nComponents= 4); //pratyush
-  Borax->AddMaterial(NatNa,12.06*perCent);//2
-  Borax->AddMaterial(NatB,11.34*perCent);//4
-  Borax->AddMaterial(NatH,5.29*perCent);//20
-  Borax->AddMaterial(NatO,71.32*perCent);//17
+  Borax->AddElement(NatNa,12.06*perCent);//2
+  Borax->AddElement(NatB,11.34*perCent);//4
+  Borax->AddElement(NatH,5.29*perCent);//20
+  Borax->AddElement(NatO,71.32*perCent);//17
 
   //Boric Acid https://www.convertunits.com/molarmass/Boric+Acid
   G4Material* boric_acid = new G4Material("boric_acid", density= 1.44* g / cm3,nComponents= 3); //pratyush
-  boric_acid->AddMaterial(NatH,4.890*perCent);//3
-  boric_acid->AddMaterial(NatB,17.484*perCent);//1
-  boric_acid->AddMaterial(NatO,77.626*perCent);//3
+  boric_acid->AddElement(NatH,4.890*perCent);//3
+  boric_acid->AddElement(NatB,17.484*perCent);//1
+  boric_acid->AddElement(NatO,77.626*perCent);//3
 
   //Borax_water_Mixture(5.8% solubity of borax https://omsi.edu/sites/all/FTP/files/kids/Borax-msds.pdf)
   //mixture of 5.5% Borax and 94.5% of Water
@@ -264,9 +270,9 @@ void IronFilterDetectorConstruction::DefineMaterials()
 
   //polyethyleneBorated
   G4Material* boratedPoly = new G4Material( "boratedPoly", density=1.19*g/cm3, nComponents=3);
-  boratedPoly->AddMaterial( NatB, 5.*perCent );
-  boratedPoly->AddMaterial( NatC, 81.4*0.95*perCent );
-  boratedPoly->AddMaterial(NatH, 18.6*0.95*perCent );
+  boratedPoly->AddElement( NatB, 5.*perCent );
+  boratedPoly->AddElement( NatC, 81.4*0.95*perCent );
+  boratedPoly->AddElement(NatH, 18.6*0.95*perCent );
 
 
 
@@ -311,12 +317,6 @@ G4double Scandium_diameter_limited=3.5*cm;//3.5*cm;
 G4double Scandium_height_limited=35*cm;//3.5*cm;
 //G4double Pb_radius = fSource_radius + 5.0*cm ;
 
-G4double Lead_rear_Height = 20.0*cm ;
-G4double Lead_front_Height= 15.0*cm ;
-G4double Al_Height = 30.0*cm ;//1.0*cm
-G4double Ti_Height = 5.0*cm ;//1.0*cm
-G4double Poly_Height = 41.0*cm ;//61.0*cm
-G4double Filter_Spacing = 50.0*cm ;
 
 G4double NeutronFilter_length = fMultiplierLeadHeightRear+fMultiplierLeadHeightFront+fModeratorAluminumHeight+fModeratorTitaniumHeight+fPolyHeight;
 

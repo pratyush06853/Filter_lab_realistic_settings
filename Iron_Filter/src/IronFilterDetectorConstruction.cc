@@ -213,14 +213,15 @@ void IronFilterDetectorConstruction::DefineMaterials()
    //Co
    G4Material* NatCo = new G4Material("NatCo", z = 27.0, a = 	58.933*g/mole, density = 8.86*g/cm3);
 
-   G4Element *TS_H = new G4Element("TS_H_of_Polyethylene", "H", 1, 1.007*g/mole);
+   G4Element *TS_H_P = new G4Element("TS_H_of_Polyethylene", "H", 1, 1.007*g/mole);
+   G4Element *TS_H_W = new G4Element("TS_H_of_Water", "H", 1, 1.007*g/mole);
 
    G4Material* air=NistMgr->FindOrBuildMaterial("G4_AIR");
    //G4Material* water=NistMgr->FindOrBuildMaterial("G4_WATER");
 
    //Water
    G4Material* water = new G4Material("water", density= 1.00 * g / cm3,nComponents= 2, kStateLiquid, 296*kelvin);
-   water->AddElement(TS_H,2);//pratyush
+   water->AddElement(TS_H_W,2);//pratyush
    water->AddElement(elO,1);//pratyush
 
   //Lithium6_Fluoride
@@ -234,28 +235,28 @@ void IronFilterDetectorConstruction::DefineMaterials()
   AlF3->AddElement(elF, 3);   //pratyush
 
   //Aluminum Fluoride
-  G4Material* Borax = new G4Material("Borax", density= 0.76* g / cm3,nComponents= 4); //pratyush
+  G4Material* Borax = new G4Material("Borax", density= 0.76* g / cm3,nComponents= 4,kStateSolid, 296*kelvin); //pratyush
   Borax->AddElement(NatNa,12.06*perCent);//2
   Borax->AddElement(NatB,11.34*perCent);//4
   Borax->AddElement(NatH,5.29*perCent);//20
   Borax->AddElement(NatO,71.32*perCent);//17
 
   //Boric Acid https://www.convertunits.com/molarmass/Boric+Acid
-  G4Material* boric_acid = new G4Material("boric_acid", density= 1.44* g / cm3,nComponents= 3); //pratyush
+  G4Material* boric_acid = new G4Material("boric_acid", density= 1.44* g / cm3,nComponents= 3,kStateSolid, 296*kelvin); //pratyush
   boric_acid->AddElement(NatH,4.890*perCent);//3
   boric_acid->AddElement(NatB,17.484*perCent);//1
   boric_acid->AddElement(NatO,77.626*perCent);//3
 
   //Borax_water_Mixture(5.8% solubity of borax https://omsi.edu/sites/all/FTP/files/kids/Borax-msds.pdf)
   //mixture of 5.5% Borax and 94.5% of Water
-  G4Material* borax_water = new G4Material( "borax_water",density= 0.9868*g/cm3, nComponents= 2); //pratyush
+  G4Material* borax_water = new G4Material( "borax_water",density= 0.9868*g/cm3, nComponents= 2,kStateLiquid, 296*kelvin); //pratyush
   borax_water->AddMaterial( Borax, 5.5*perCent );  //pratyush
   borax_water->AddMaterial( water, 94.5*perCent ); //pratyush
 
 
   //Borax_BoricAcid_buffer(https://www.researchgate.net/publication/244069630_Preparation_of_highly_concentrated_aqueous_solution_of_sodium_borate)
   //mixture of 20g BoricAcid, 25g of Borax and 100g of water
-  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3);
+  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3,kStateLiquid, 296*kelvin);
   borax_boricacid_buffer->AddMaterial( boric_acid, 13.7*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( Borax, 17.2*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( water, 69.1*perCent );//pratyush
@@ -269,16 +270,19 @@ void IronFilterDetectorConstruction::DefineMaterials()
 
 
   //polyethyleneBorated
-  //G4Material* boratedPoly = new G4Material( "boratedPoly", density=1.19*g/cm3, nComponents=3);
-  //boratedPoly->AddElement( NatB, 5.*perCent );
-  //boratedPoly->AddElement( NatC, 81.4*0.95*perCent );
-  //boratedPoly->AddElement(NatH, 18.6*0.95*perCent );
+  G4Material* boratedPoly = new G4Material( "boratedPoly", density=1.19*g/cm3, nComponents=3,kStateSolid, 296*kelvin);
+  //boratedPoly->AddElement( NatB, 3.*perCent );
+  //boratedPoly->AddElement( NatC, 81.4*0.97*perCent );
+  //boratedPoly->AddElement(NatH, 18.6*0.97*perCent );
+  boratedPoly->AddElement( NatB, 3.*perCent );
+  boratedPoly->AddElement( NatC, 14.424*perCent );
+  boratedPoly->AddElement(TS_H_P, 82.576*perCent );
 
   // Polyethylene with boron at 3% - Has borated polyethylene any oxygen elements?
-  G4Material* boratedPoly = new G4Material("boratedPoly ", 0.96*g/cm3, 3);
-  boratedPoly->AddElement(NatH,  14.424*perCent);
-  boratedPoly->AddElement(NatC,  82.586*perCent);
-  boratedPoly->AddElement(NatB,  3.00*perCent);
+  //G4Material* boratedPoly = new G4Material("boratedPoly ", density=0.96*g/cm3, nComponents=3);
+  //boratedPoly->AddElement(NatH,  14.424*perCent);
+  //boratedPoly->AddElement(NatC,  82.576*perCent);
+  //boratedPoly->AddElement(NatB,  3.00*perCent);
 
 
 

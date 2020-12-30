@@ -256,7 +256,7 @@ void IronFilterDetectorConstruction::DefineMaterials()
 
   //Borax_BoricAcid_buffer(https://www.researchgate.net/publication/244069630_Preparation_of_highly_concentrated_aqueous_solution_of_sodium_borate)
   //mixture of 20g BoricAcid, 25g of Borax and 100g of water
-  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3,kStateLiquid, 296*kelvin);
+  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3, 296*kelvin);
   borax_boricacid_buffer->AddMaterial( boric_acid, 13.7*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( Borax, 17.2*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( water, 69.1*perCent );//pratyush

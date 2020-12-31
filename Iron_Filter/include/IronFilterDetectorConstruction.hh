@@ -67,6 +67,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     const G4VPhysicalVolume* GetboratedwaterPV() const;
     const G4VPhysicalVolume* GetcollimationholePV() const;
     //const G4VPhysicalVolume* GetLabFloorWallsolidPV() const;
+    const G4VPhysicalVolume* GetTestSurfacesolidPV() const;
     const G4VPhysicalVolume* GetmultiplierleadPV() const;
     const G4VPhysicalVolume* GetTestRIGHTSIDEPV() const;
     const G4VPhysicalVolume* GetTestTOPPV() const;
@@ -107,6 +108,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* boratedwater_PV;
     G4VPhysicalVolume* collimation_hole_PV;
     //G4VPhysicalVolume* LabFloorWall_solid_PV;
+    G4VPhysicalVolume* TestSurface_solid_PV;
     G4VPhysicalVolume* multiplier_lead_PV;
     G4VPhysicalVolume* Test_RIGHTSIDE_PV;
     G4VPhysicalVolume* Test_TOP_PV;
@@ -154,6 +156,10 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
 //inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorWallsolidPV() const {
 //  return LabFloorWall_solid_PV;
 //}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestSurfacesolidPV() const {
+  return TestSurface_solid_PV;
+}
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetboratedwaterPV() const {
   return boratedwater_PV;

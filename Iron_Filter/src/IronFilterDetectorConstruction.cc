@@ -69,6 +69,7 @@ G4ThreadLocal
 IronFilterDetectorConstruction::IronFilterDetectorConstruction()
  : G4VUserDetectorConstruction(),
    //LabFloorWall_solid_PV(0),
+   TestSurface_solid_PV(0),
    boratedwater_PV(0),
    multiplier_lead_PV(0),
    moderator_aluminum_PV(0),
@@ -256,7 +257,7 @@ void IronFilterDetectorConstruction::DefineMaterials()
 
   //Borax_BoricAcid_buffer(https://www.researchgate.net/publication/244069630_Preparation_of_highly_concentrated_aqueous_solution_of_sodium_borate)
   //mixture of 20g BoricAcid, 25g of Borax and 100g of water
-  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3, 296*kelvin);
+  G4Material* borax_boricacid_buffer = new G4Material( "borax_boricacid_buffer",density= 1.019*g/cm3, nComponents= 3,kStateLiquid, 296*kelvin);
   borax_boricacid_buffer->AddMaterial( boric_acid, 13.7*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( Borax, 17.2*perCent );//pratyush
   borax_boricacid_buffer->AddMaterial( water, 69.1*perCent );//pratyush
@@ -381,7 +382,7 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   G4VPhysicalVolume* vacuum_solid_PV = new G4PVPlacement(NO_ROT,G4ThreeVector{0.,0.,0.}, vacuum_solid_LV, "Vacuum_solid", 0, false, 0, fCheckOverlaps);
   vacuum_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
 
-  //out_neutron donot include ceiling
+  //Lab donot include ceiling
   G4VSolid* Main_2_S = new G4Box("Main_2_solid", lab68_wall_x/2.0, lab68_wall_y/2.0 , lab68_wall_z/2.0);
   G4VSolid* hole_2_S = new G4Box("hole_2_solid", (lab68_wall_x-2*lab68_wall_thickness)/2.0, (lab68_wall_y-2*lab68_wall_thickness)/2.0, (lab68_wall_z-2*lab68_wall_thickness)/2.0);
   G4SubtractionSolid* LabFloorWall_solid_S= new G4SubtractionSolid("LabFloorWall_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
@@ -389,6 +390,15 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   //LabFloorWall_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin, LabFloorWall_solid_LV, "OutSpacer", vacuum_solid_LV, false, 0, fCheckOverlaps);
   //LabFloorWall_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Grey()));
   //LabFloorWall_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
+
+  //out_neutron box  delta/2.0
+  G4VSolid* Main_3_S = new G4Box("Main_3_solid", Water_x+delta/2.0, Water_y+delta/2.0 , Water_z+delta/2.0);
+  G4VSolid* hole_3_S = new G4Box("hole_3_solid", Water_x, Water_y, Water_z);
+  G4SubtractionSolid* TestSurface_solid_S= new G4SubtractionSolid("TestSurface_solid", Main_3_S, hole_3_S, NO_ROT, G4ThreeVector(0.,0., 0.));
+  G4LogicalVolume* TestSurface_solid_LV = new G4LogicalVolume(TestSurface_solid_S, Vacuum, "TestSurface_solid");
+  TestSurface_solid_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing+Water_y/2.0, 0), TestSurface_solid_LV, "TestSurface", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  TestSurface_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Grey()));
+  //TestSurface_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
 
 
   //layer of air at the bottom of the filter

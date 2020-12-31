@@ -106,6 +106,10 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
           test_volumeID = 6;
           flag=1;
         }
+        else if(volume == fDetConstruction->GetTestSurfacesolidPV()){
+          test_volumeID = 7;
+          flag=1;
+        }
         else {
           test_volumeID =8;
           flag=0;

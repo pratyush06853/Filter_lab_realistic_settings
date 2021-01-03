@@ -139,6 +139,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                    //analysisManager->FillNtupleIColumn(0, trackID);
                    //analysisManager->FillNtupleIColumn(1, stepID);
                    //analysisManager->FillNtupleIColumn(0, particle_ID);
+                   //G4cout<<eventID<<"     "<<trackID<<"      "<<particle_ID<<"      "<<test_volumeID<<G4endl;
                    analysisManager->FillNtupleDColumn(0, energy);
                    analysisManager->FillNtupleDColumn(1, track->GetPosition().x());
                    analysisManager->FillNtupleDColumn(2, track->GetPosition().y());

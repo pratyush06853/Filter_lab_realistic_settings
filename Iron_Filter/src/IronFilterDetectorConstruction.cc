@@ -491,14 +491,14 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   //FrontSide; just outside the Boraxwater Vessel
   G4VSolid* Test_FRONTSIDE_S = new G4Box("Test_FRONTSIDE_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
   G4LogicalVolume *Test_FRONTSIDE_LV = new G4LogicalVolume(Test_FRONTSIDE_S, Vacuum,"Test_FRONTSIDE" );
-  new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing-delta/2.0,0), Test_FRONTSIDE_LV, "Test_FRONTSIDE",vacuum_solid_LV, false, 0, fCheckOverlaps);
-  Test_FRONTSIDE_LV->SetVisAttributes(G4VisAttributes(G4Colour::Red()));
+  Test_FRONTSIDE_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing-delta/2.0,0), Test_FRONTSIDE_LV, "Test_FRONTSIDE",vacuum_solid_LV, false, 0, fCheckOverlaps);
+  Test_FRONTSIDE_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
   //At the center
   G4VSolid* Test_CENTERPOINT_S = new G4Box("Test_CENTERPOINT_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
   G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
-  new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
-  Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Red()));
+  Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
 
   // Always return the physical World

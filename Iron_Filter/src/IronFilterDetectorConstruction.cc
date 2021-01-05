@@ -276,8 +276,8 @@ void IronFilterDetectorConstruction::DefineMaterials()
   //boratedPoly->AddElement( NatC, 81.4*0.97*perCent );
   //boratedPoly->AddElement(NatH, 18.6*0.97*perCent );
   boratedPoly->AddElement( NatB, 3.*perCent );
-  boratedPoly->AddElement( NatC, 14.424*perCent );
-  boratedPoly->AddElement(TS_H_P, 82.576*perCent );
+  boratedPoly->AddElement( NatC, 82.576*perCent );
+  boratedPoly->AddElement(TS_H_P, 14.424*perCent );
 
   // Polyethylene with boron at 3% - Has borated polyethylene any oxygen elements?
   //G4Material* boratedPoly = new G4Material("boratedPoly ", density=0.96*g/cm3, nComponents=3);
@@ -406,8 +406,8 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   G4VSolid* hole_S = new G4Box("hole_solid", Poly_a/2.0 , Poly_a/2.0, NeutronFilter_length/2.0);
   G4SubtractionSolid* boratedwater_S= new G4SubtractionSolid("boratedwater", Main_S, hole_S, turnAlongX, G4ThreeVector(0., Water_y/2.0-Water_rear_side-NeutronFilter_length/2.0, 0.));
   //G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxWater, "boratedwater");
-  G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxBoricAcidBuffer, "boratedwater");
-  //G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoratedPoly, "boratedwater");
+  //G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoraxBoricAcidBuffer, "boratedwater");
+  G4LogicalVolume* boratedwater_LV = new G4LogicalVolume(boratedwater_S, BoratedPoly, "boratedwater");
   boratedwater_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing+Water_y/2.0, 0), boratedwater_LV, "BoratedWater", vacuum_solid_LV, false, 0, fCheckOverlaps);
   boratedwater_LV->SetVisAttributes(G4VisAttributes(G4Colour::Cyan()));
 

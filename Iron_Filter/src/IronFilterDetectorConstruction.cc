@@ -68,7 +68,12 @@ G4ThreadLocal
 
 IronFilterDetectorConstruction::IronFilterDetectorConstruction()
  : G4VUserDetectorConstruction(),
-   //LabFloorWall_solid_PV(0),
+   LabFloorWall_solid_PV(0),
+   LabFloorExtended_solid_PV(0),
+   frontglassdoor_PV(0),
+   frontdoor_PV(0),
+   glasswindow_PV(0),
+   reardoor_PV(0),
    TestSurface_solid_PV(0),
    boratedwater_PV(0),
    multiplier_lead_PV(0),
@@ -76,6 +81,10 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
    moderator_titanium_PV(0),
    filter_scandium_PV(0),
    collimation_hole_PV(0),
+   Phantom_PV(0),
+   Phantom2_PV(0),
+   Phantom3_PV(0),
+   Phantom4_PV(0),
    Test_RIGHTSIDE_PV(0),
    Test_REARSIDE_PV(0),
    inner_BPoly_PV(0),
@@ -107,6 +116,10 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
   fPolyHeight = 41.0*cm;//
 
   fFilterCellSpacing= 50.0*cm;//5
+
+  ftestx = 4.5*m;
+  ftesty = 4.5*m;
+  ftestz = 4.5*m;
 
 
 
@@ -147,13 +160,44 @@ void IronFilterDetectorConstruction::DefineMaterials()
   //G4Element* elBe = new G4Element(name = "Beryllium", symbol = "Be", z = 4.0, a = 9.012*g/mole);
   G4Element* elF = new G4Element(name= "Fluorine", symbol = "F", z = 9.0, a= 18.998403*g/mole); //pratyush
   G4Element* elLi6  = new G4Element(name = "Lithium", symbol = "Li", z = 3.0, a = 6.015*g/mole);
-  G4Element* elO  = new G4Element(name = "Oxygen", symbol = "O", z = 8.0, a = 15.999*g/mole);
+  //G4Element* elO  = new G4Element(name = "Oxygen", symbol = "O", z = 8.0, a = 15.999*g/mole);
   //G4Element* elCr  = new G4Element(name = "Chromium", symbol = "Cr", z = 24.0, a = 51.996*g/mole);
-  G4Element* elFe  = new G4Element(name = "Iron", symbol = "Fe", z = 26.0, a = 55.845*g/mole);
+  //G4Element* elFe  = new G4Element(name = "Iron", symbol = "Fe", z = 26.0, a = 55.845*g/mole);
   //G4Element* elNi  = new G4Element(name = "Nickel", symbol = "Ni", z = 28.0, a = 58.693*g/mole);
   //G4Element* elMo  = new G4Element(name = "Molybdenum", symbol = "Mo", z = 42.0, a = 95.94*g/mole);
   G4Element* elAl  = new G4Element(name = "Aluminum", symbol = "Al", z = 13.0, a = 26.982*g/mole);
+  //G4Element* elZn  = new G4Element(name = "zinc", symbol = "Zn", z = 30.0, a = 65.38*g/mole);
+  G4Element* elS  = new G4Element(name = "sulphur", symbol = "S", z = 16.0, a = 32.065*g/mole);
+  G4Element* elH  = new G4Element(name = "Hydrogen", symbol = "H", z = 1.0, a = 1.008*g/mole);
+  G4Element* elC  = new G4Element(name = "Carbon", symbol = "C", z = 6.0, a = 12.011*g/mole);
+  G4Element* elN = new G4Element("Nitrogen", symbol = "N",z = 7.,a = 14.01*g/mole);
+  G4Element* elO = new G4Element("Oxygen", symbol = "O",z = 8.,a = 16.00*g/mole);
 
+  G4Element* elNa = new G4Element("Sodium",symbol ="Na",z = 11.,a= 22.99*g/mole);
+
+  G4Element* elMg = new G4Element("Magnesium",symbol ="Mg",z = 12.,a= 24.305*g/mole);
+
+  G4Element* elP = new G4Element("Phosphorus",symbol ="P",z = 15.,a= 30.974*g/mole);
+
+  G4Element* elCl = new G4Element("Chlorine",symbol ="Cl",z = 17.,a= 35.453*g/mole);
+
+  G4Element* elK = new G4Element("Potassium",symbol ="K",z = 19.,a= 39.098*g/mole);
+
+  G4Element* elCa = new G4Element("Calcium",symbol ="Ca",z = 20.,a= 40.08*g/mole);
+
+  G4Element* elFe  = new G4Element("Iron",symbol ="Fe",z = 26.,a= 55.85*g/mole);
+
+  G4Element* elZn = new G4Element("Zinc",symbol ="Zn",z = 30.,a= 65.38*g/mole);
+
+  G4Element* elRb = new G4Element("Rb",symbol ="Rb",z = 37.,a= 85.47 *g/mole);
+
+  G4Element* elSr = new G4Element("Sr",symbol ="Sr",z = 38.,a= 87.62 *g/mole);
+
+  G4Element* elZr = new G4Element("Zr",symbol ="Zr",z = 40.,a= 91.22 *g/mole);
+
+  G4Element* elPb = new G4Element("Lead",symbol ="Pb", z = 82.,a= 207.19 *g/mole);
+
+  G4Element* elSi  = new G4Element("Silicon", symbol = "Si", z = 14.0, a = 28.085*g/mole);
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////////////////
   G4Element* elH  = new G4Element(name = "Hydrogen", symbol = "H", z = 1.0, a = 1.008*g/mole);
@@ -217,8 +261,8 @@ void IronFilterDetectorConstruction::DefineMaterials()
    G4Element *TS_H_P = new G4Element("TS_H_of_Polyethylene", "H", 1, 1.007*g/mole);
    G4Element *TS_H_W = new G4Element("TS_H_of_Water", "H", 1, 1.007*g/mole);
 
-   G4Material* air=NistMgr->FindOrBuildMaterial("G4_AIR");
-   //G4Material* water=NistMgr->FindOrBuildMaterial("G4_WATER");
+   G4Material* air = NistMgr->FindOrBuildMaterial("G4_AIR");
+   //G4Material* concrete = NistMgr->FindOrBuildMaterial("G4_CONCRETE");
 
    //Water
    G4Material* water = new G4Material("water", density= 1.00 * g / cm3,nComponents= 2, kStateLiquid, 296*kelvin);
@@ -279,13 +323,63 @@ void IronFilterDetectorConstruction::DefineMaterials()
   boratedPoly->AddElement( NatC, 82.576*perCent );
   boratedPoly->AddElement(TS_H_P, 14.424*perCent );
 
+  // wood
+  G4Material* wood = new G4Material("wood", density=0.9*g/cm3, nComponents=3);
+  wood->AddElement(TS_H_P , 4);
+  wood->AddElement(elO , 1);
+  wood->AddElement(elC, 2);
+
+  G4Material* quartz = new G4Material("quartz", density=2.200*g/cm3, nComponents=2);
+  quartz->AddElement(elSi, 1);
+  quartz->AddElement(elO , 2);
+
   // Polyethylene with boron at 3% - Has borated polyethylene any oxygen elements?
   //G4Material* boratedPoly = new G4Material("boratedPoly ", density=0.96*g/cm3, nComponents=3);
   //boratedPoly->AddElement(NatH,  14.424*perCent);
   //boratedPoly->AddElement(NatC,  82.576*perCent);
   //boratedPoly->AddElement(NatB,  3.00*perCent);
+  G4Material*soft_tissue = new G4Material("soft_tissue",density= 0.9869*g/cm3,nComponents=16);
+  soft_tissue->AddElement(TS_H_P,0.1047*perCent);
+  soft_tissue->AddElement(elC,0.2302*perCent);
+  soft_tissue->AddElement(elN,0.0234*perCent);
+  soft_tissue->AddElement(elO,0.6321*perCent);
+  soft_tissue->AddElement(elNa,0.0013*perCent);
+  soft_tissue->AddElement(elMg,0.00015*perCent);
+  soft_tissue->AddElement(elP,0.0024*perCent);
+  soft_tissue->AddElement(elS,0.0022*perCent);
+  soft_tissue->AddElement(elCl,0.0014*perCent);
+  soft_tissue->AddElement(elK,0.0021*perCent);
+  soft_tissue->AddElement(elFe,0.000063*perCent);
+  soft_tissue->AddElement(elZn,0.000032*perCent);
+  soft_tissue->AddElement(elRb,0.0000057*perCent);
+  soft_tissue->AddElement(elSr,0.00000034*perCent);
+  soft_tissue->AddElement(elZr,0.000008*perCent);
+  soft_tissue->AddElement(elPb,0.00000016*perCent);
 
 
+  //soil
+  G4Material*soil = new G4Material("soil",density= 1.50*g/cm3,nComponents=8);
+  soil->AddElement(elH,0.021*perCent);
+  soil->AddElement(elC,0.016*perCent);
+  soil->AddElement(elO,0.577*perCent);
+  soil->AddElement(elAl,0.050*perCent);
+  soil->AddElement(elSi,0.271*perCent);
+  soil->AddElement(elK,0.013*perCent);
+  soil->AddElement(elCa,0.041*perCent);
+  soil->AddElement(elFe,0.011*perCent);
+
+  //concrete
+  G4Material*concrete = new G4Material("concrete",density= 2.3*g/cm3,nComponents=10);
+  concrete->AddElement(elH,0.01*perCent);
+  concrete->AddElement(elC,0.001*perCent);
+  concrete->AddElement(elO,0.529107*perCent);
+  concrete->AddElement(elNa,0.016*perCent);
+  concrete->AddElement(elMg,0.002*perCent);
+  concrete->AddElement(elAl,0.033872*perCent);
+  concrete->AddElement(elSi,0.337021*perCent);
+  concrete->AddElement(elK,0.013*perCent);
+  concrete->AddElement(elCa,0.044*perCent);
+  concrete->AddElement(elFe,0.014*perCent);
 
 
   // Print materials
@@ -312,6 +406,11 @@ G4VPhysicalVolume* IronFilterDetectorConstruction::DefineVolumes()
   G4Material* Cobalt = G4Material::GetMaterial("NatCo");
   G4Material* Nickel60 = G4Material::GetMaterial("Ni60");
   G4Material* Iron54 = G4Material::GetMaterial("Fe54");
+  G4Material*  Soft_Tissue=G4Material::GetMaterial("soft_tissue");
+  G4Material*  Concrete = G4Material::GetMaterial("concrete");
+  G4Material*  Wood = G4Material::GetMaterial("wood");
+  G4Material*  Quartz = G4Material::GetMaterial("quartz");
+  G4Material*  Soil = G4Material::GetMaterial("soil");
   G4Material* Air=G4Material::GetMaterial("air");
 
   if ( ! Vacuum ) {
@@ -345,7 +444,27 @@ G4double lab68_wall_x = 6.6*m ;
 G4double lab68_wall_y = 9.3*m ;
 G4double lab68_wall_z = 5.6*m ;
 
-G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the inner upper left corner of the room
+G4double lab68_frontdoor_glass_height = 2.9*m;
+G4double lab68_frontdoor_glass_width = 2.2*m;
+
+G4double lab68_frontdoor_wood_height = 2.3*m;
+G4double lab68_frontdoor_wood_width = 1.5*m;
+
+G4double lab68_glasswindow_height = 1.08*m;
+G4double lab68_glasswindow_width = 0.57*m;
+
+G4double lab68_reardoor_height = 2.3*m;
+G4double lab68_reardoor_width = 0.91*m;
+
+G4double lab68_frontdoor_x_coordinate = lab68_wall_x/2 -lab68_frontdoor_glass_width/2.0-1.2*m;
+G4double lab68_reardoor_x_coordinate = -lab68_wall_x/2 +lab68_reardoor_width/2.0+2.6*m;
+
+G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the inner upper left corner of the room(Doug's corner)
+
+G4ThreeVector xyposition_of_origin = {2.7*m, -2.45*m, 0};
+
+G4double Phantom_Radius=0.5*m;
+G4double Phantom_Height=2.0*m;
 
 
 //
@@ -386,14 +505,59 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   G4VSolid* Main_2_S = new G4Box("Main_2_solid", lab68_wall_x/2.0, lab68_wall_y/2.0 , lab68_wall_z/2.0);
   G4VSolid* hole_2_S = new G4Box("hole_2_solid", (lab68_wall_x-2*lab68_wall_thickness)/2.0, (lab68_wall_y-2*lab68_wall_thickness)/2.0, (lab68_wall_z-2*lab68_wall_thickness)/2.0);
   G4SubtractionSolid* LabFloorWall_solid_S= new G4SubtractionSolid("LabFloorWall_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
-  G4LogicalVolume* LabFloorWall_solid_LV = new G4LogicalVolume(LabFloorWall_solid_S, Vacuum, "LabFloorWall_solid");
+  //G4SubtractionSolid* Main_2a_S= new G4SubtractionSolid("Main_2a_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
+  G4LogicalVolume* LabFloorWall_solid_LV = new G4LogicalVolume(LabFloorWall_solid_S, Concrete, "LabFloorWall_solid");
+  LabFloorWall_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin, LabFloorWall_solid_LV, "LabFloorWall", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  LabFloorWall_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Grey()));
+
+
+
+  //Lab donot include ceiling
+  G4VSolid* LabFloorExtended_solid_S=  new G4Box("LabFloorExtended_solid", 15.0*m, 15.0*m , 15.0*m);
+  //G4SubtractionSolid* Main_2a_S= new G4SubtractionSolid("Main_2a_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
+  G4LogicalVolume* LabFloorExtended_solid_LV = new G4LogicalVolume(LabFloorExtended_solid_S, Soil, "LabFloorExtended_solid");
+  LabFloorExtended_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin-G4ThreeVector(0., 0., lab68_wall_z/2.0+15.0*m), LabFloorExtended_solid_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
+  LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
+
+  G4VSolid* frontglassdoor_S = new G4Box("frontglassdoor_solid", lab68_frontdoor_glass_width/2.0, lab68_wall_thickness/2.0, lab68_frontdoor_glass_height/2.0);
+  //G4SubtractionSolid* Main_2b_S= new G4SubtractionSolid("Main_2b_solid", Main_2a_S, frontdoor_S, NO_ROT, G4ThreeVector(lab68_frontdoor_x_coordinate ,-lab68_wall_y/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_frontdoor_glass_height)/2.0));
+  G4LogicalVolume* frontglassdoor_LV = new G4LogicalVolume(frontglassdoor_S, Quartz, "frontglassdoor");
+  frontglassdoor_PV = new G4PVPlacement(NO_ROT, G4ThreeVector(lab68_frontdoor_x_coordinate ,-(lab68_wall_y-lab68_wall_thickness)/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_frontdoor_glass_height)/2.0), frontglassdoor_LV, "Front Glass Door", LabFloorWall_solid_LV, false, 0, fCheckOverlaps);
+  frontglassdoor_LV->SetVisAttributes(G4VisAttributes(G4Colour::Cyan()));
+
+
+  G4VSolid* frontdoor_S = new G4Box("frontdoor_solid", lab68_frontdoor_wood_width/2.0, lab68_wall_thickness/2.0, lab68_frontdoor_wood_height/2.0);
+  //G4SubtractionSolid* Main_2b_S= new G4SubtractionSolid("Main_2b_solid", Main_2a_S, frontdoor_S, NO_ROT, G4ThreeVector(lab68_frontdoor_x_coordinate ,-lab68_wall_y/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_frontdoor_glass_height)/2.0));
+  G4LogicalVolume* frontdoor_LV = new G4LogicalVolume(frontdoor_S, Wood, "frontdoor");
+  frontdoor_PV = new G4PVPlacement(NO_ROT, G4ThreeVector(lab68_frontdoor_glass_width/2.0-lab68_frontdoor_wood_width/2.0 ,0, -lab68_frontdoor_glass_height/2.0+lab68_frontdoor_wood_height/2.0), frontdoor_LV, "Front Wood Door", frontglassdoor_LV, false, 0, fCheckOverlaps);
+  frontdoor_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
+
+
+  G4VSolid* glasswindow_S = new G4Box("glasswindow_solid", lab68_glasswindow_width/2.0, lab68_wall_thickness/2.0, lab68_glasswindow_height/2.0);
+  //G4SubtractionSolid* Main_2b_S= new G4SubtractionSolid("Main_2b_solid", Main_2a_S, frontdoor_S, NO_ROT, G4ThreeVector(lab68_frontdoor_x_coordinate ,-lab68_wall_y/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_frontdoor_glass_height)/2.0));
+  G4LogicalVolume* glasswindow_LV = new G4LogicalVolume(glasswindow_S, Quartz, "glasswindow");
+  glasswindow_PV = new G4PVPlacement(NO_ROT, G4ThreeVector(lab68_frontdoor_wood_width/2.0-0.16*m-lab68_glasswindow_width/2.0, 0, -lab68_frontdoor_wood_height/2.0+1.11*m+lab68_glasswindow_height/2.0), glasswindow_LV, "Front Glass Window", frontdoor_LV, false, 0, fCheckOverlaps);
+  glasswindow_LV->SetVisAttributes(G4VisAttributes(G4Colour::Cyan()));
+
+
+  G4VSolid* reardoor_S = new G4Box("reardoor_solid", lab68_reardoor_width/2.0, lab68_wall_thickness/2.0, lab68_reardoor_height/2.0);
+  //G4SubtractionSolid* LabFloorWall_solid_S= new G4SubtractionSolid("LabFloorWall_solid", Main_2b_S, reardoor_S, NO_ROT, G4ThreeVector(lab68_reardoor_x_coordinate ,lab68_wall_y/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_reardoor_height)/2.0));
+  G4LogicalVolume* reardoor_LV = new G4LogicalVolume(reardoor_S, Wood, "reardoor");
+  reardoor_PV = new G4PVPlacement(NO_ROT, G4ThreeVector(lab68_reardoor_x_coordinate ,(lab68_wall_y-lab68_wall_thickness)/2.0, -(lab68_wall_z-2*lab68_wall_thickness-lab68_reardoor_height)/2.0), reardoor_LV, "Rear Wooden Door", LabFloorWall_solid_LV, false, 0, fCheckOverlaps);
+  reardoor_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
+
+
+  //G4LogicalVolume* LabFloorWall_solid_LV = new G4LogicalVolume(LabFloorWall_solid_S, Concrete, "LabFloorWall_solid");
   //LabFloorWall_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin, LabFloorWall_solid_LV, "OutSpacer", vacuum_solid_LV, false, 0, fCheckOverlaps);
   //LabFloorWall_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Grey()));
   //LabFloorWall_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
 
+
+
   //out_neutron box  delta/2.0
-  G4VSolid* Main_3_S = new G4Box("Main_3_solid", Water_x+delta/2.0, Water_y+delta/2.0 , Water_z+delta/2.0);
-  G4VSolid* hole_3_S = new G4Box("hole_3_solid", Water_x, Water_y, Water_z);
+  G4VSolid* Main_3_S = new G4Box("Main_3_solid", (1.02*Water_x+delta)/2.0, (1.02*Water_y+delta)/2.0 , (1.02*Water_z+delta)/2.0);
+  G4VSolid* hole_3_S = new G4Box("hole_3_solid", 1.02*Water_x/2.0, 1.02*Water_y/2.0, 1.02*Water_z/2.0);
   G4SubtractionSolid* TestSurface_solid_S= new G4SubtractionSolid("TestSurface_solid", Main_3_S, hole_3_S, NO_ROT, G4ThreeVector(0.,0., 0.));
   G4LogicalVolume* TestSurface_solid_LV = new G4LogicalVolume(TestSurface_solid_S, Vacuum, "TestSurface_solid");
   TestSurface_solid_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., fFilterCellSpacing+Water_y/2.0, 0), TestSurface_solid_LV, "TestSurface", vacuum_solid_LV, false, 0, fCheckOverlaps);
@@ -499,6 +663,40 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
   G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
   Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
   Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
+
+
+  G4ThreeVector Phantom_Placement= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
+                                      +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.)
+                                            +G4ThreeVector(ftestx, ftesty, 0);
+
+  G4ThreeVector Phantom_Placement_2= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
+                                      +G4ThreeVector(0.,NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.0)
+                                            +G4ThreeVector(-ftestx, -ftesty, 0);
+
+  G4ThreeVector Phantom_Placement_3= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
+                                        +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.)
+                                                +G4ThreeVector(ftestx, -ftesty, 0);
+
+  G4ThreeVector Phantom_Placement_4= G4ThreeVector(lab68_wall_x/2.0,-lab68_wall_y/2.0, 0)-xyposition_of_origin;
+  //G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
+  //                                       +G4ThreeVector(0., 0.,NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0)
+  //                                               +G4ThreeVector(-ftestx, ftesty, 0);
+
+  // Poly need to change
+  G4VSolid* Phantom_S = new G4Tubs("Phantom", zeroRadius, Phantom_Radius/2.0, Phantom_Height/2.0, startAngle, spanningAngle);
+  //G4LogicalVolume* Phantom_LV = new G4LogicalVolume(Phantom_S, Air, "Phantom");
+  G4LogicalVolume* Phantom_LV = new G4LogicalVolume(Phantom_S, Soft_Tissue, "Phantom");
+  Phantom_PV = new G4PVPlacement(NO_ROT, Phantom_Placement, Phantom_LV, "Phantom", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  Phantom2_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_2, Phantom_LV, "Phantom2", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  Phantom3_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_3, Phantom_LV, "Phantom3", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  Phantom4_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_4, Phantom_LV, "Phantom3", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  Phantom_LV->SetVisAttributes(G4VisAttributes(G4Colour::Green()));
+
+
 
 
   // Always return the physical World
@@ -609,4 +807,34 @@ void IronFilterDetectorConstruction::SetModeratorTitaniumRadius(G4double ival)
       return;
     }
   fModeratorTitaniumRadius = ival;
+}
+
+void IronFilterDetectorConstruction::SetTestX(G4double ival)
+{
+  if (ival < 1)
+    { G4cout << "\n --->warning from Setftestx: "
+             << ival << " must be at least 1. Command refused" << G4endl;
+      return;
+    }
+  ftestx = ival;
+}
+
+void IronFilterDetectorConstruction::SetTestY(G4double ival)
+{
+  if (ival < 1)
+    { G4cout << "\n --->warning from Setftesty: "
+             << ival << " must be at least 1. Command refused" << G4endl;
+      return;
+    }
+  ftesty = ival;
+}
+
+void IronFilterDetectorConstruction::SetTestZ(G4double ival)
+{
+  if (ival < 1)
+    { G4cout << "\n --->warning from Setftestz: "
+             << ival << " must be at least 1. Command refused" << G4endl;
+      return;
+    }
+  ftestz = ival;
 }

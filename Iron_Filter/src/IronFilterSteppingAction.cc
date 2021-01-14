@@ -80,35 +80,51 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
 
         if(volume == fDetConstruction->GetTestCENTERPOINTPV()){
           test_volumeID = 0;
-          flag=1;
+          flag=0;
          }
         else if(volume == fDetConstruction->GetTestFRONTSIDEPV()){
            test_volumeID = 1;
-           flag=1;
+           flag=0;
         }
         else if(volume == fDetConstruction->GetTestREARSIDEPV()){
            test_volumeID = 2;
-           flag=1;
+           flag=0;
         }
         else if(volume == fDetConstruction->GetTestRIGHTSIDEPV()){
          test_volumeID = 3;
-         flag=1;
+         flag=0;
         }
         else if(volume == fDetConstruction->GetTestLEFTSIDEPV()){
           test_volumeID = 4;
-          flag=1;
+          flag=0;
         }
         else if(volume == fDetConstruction->GetTestBOTTOMPV()){
          test_volumeID = 5;
-         flag=1;
+         flag=0;
         }
         else if(volume == fDetConstruction->GetTestTOPPV()){
           test_volumeID = 6;
-          flag=1;
+          flag=0;
         }
         else if(volume == fDetConstruction->GetTestSurfacesolidPV()){
           test_volumeID = 7;
           flag=1;
+        }
+        else if(volume == fDetConstruction->GetPhantomPV()){
+          test_volumeID = 8;
+          flag=0;
+        }
+        else if(volume == fDetConstruction->GetPhantom2PV()){
+          test_volumeID = 9;
+          flag=0;
+        }
+        else if(volume == fDetConstruction->GetPhantom3PV()){
+          test_volumeID = 10;
+          flag=0;
+        }
+        else if(volume == fDetConstruction->GetPhantom4PV()){
+          test_volumeID = 11;
+          flag=0;
         }
         else {
           test_volumeID =8;
@@ -133,7 +149,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                G4int particle_ID = track->GetParticleDefinition()->GetPDGEncoding();
 
                // TODO: turn this into a tree that gets filled 2112 neutrons
-               if( (particle_ID == 2112 || particle_ID == 22) ){
+               //if( (particle_ID == 2112 || particle_ID == 22) ){
                //if( particle_ID == 2112 && (test_volumeID == 2 || test_volumeID == 3)  ){
                    //analysisManager->FillNtupleIColumn(0, eventID);
                    //analysisManager->FillNtupleIColumn(0, trackID);
@@ -154,7 +170,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                    analysisManager->FillNtupleIColumn(11, trackID);
                    analysisManager->FillNtupleIColumn(12, stepID);
                    analysisManager->AddNtupleRow();
-               }
+               //} //close if statement
 
          }
 }

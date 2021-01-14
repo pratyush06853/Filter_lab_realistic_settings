@@ -59,6 +59,9 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     void SetModeratorAluminumHeight   (G4double);
     void SetMultiplierLeadHeightFront   (G4double);
     void SetModeratorTitaniumRadius   (G4double);
+    void SetTestX   (G4double);
+    void SetTestY   (G4double);
+    void SetTestZ   (G4double);
     ///
 
 
@@ -66,7 +69,16 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     //
     const G4VPhysicalVolume* GetboratedwaterPV() const;
     const G4VPhysicalVolume* GetcollimationholePV() const;
-    //const G4VPhysicalVolume* GetLabFloorWallsolidPV() const;
+    const G4VPhysicalVolume* GetPhantomPV() const;
+    const G4VPhysicalVolume* GetPhantom2PV() const;
+    const G4VPhysicalVolume* GetPhantom3PV() const;
+    const G4VPhysicalVolume* GetPhantom4PV() const;
+    const G4VPhysicalVolume* GetLabFloorWallsolidPV() const;
+    const G4VPhysicalVolume* GetLabFloorExtendedsolidPV() const;
+    const G4VPhysicalVolume* GetfrontglassdoorPV() const;
+    const G4VPhysicalVolume* GetfrontdoorPV() const;
+    const G4VPhysicalVolume* GetglasswindowPV() const;
+    const G4VPhysicalVolume* GetreardoorPV() const;
     const G4VPhysicalVolume* GetTestSurfacesolidPV() const;
     const G4VPhysicalVolume* GetmultiplierleadPV() const;
     const G4VPhysicalVolume* GetTestRIGHTSIDEPV() const;
@@ -93,6 +105,9 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4double GetModeratorAluminumHeight() const    {return fModeratorAluminumHeight;};
     G4double GetMultiplierLeadHeightFront() const    {return fMultiplierLeadHeightFront;};
     G4double GetModeratorTitaniumRadius() const    {return fModeratorTitaniumRadius;};
+    G4double GetTestX() const    {return ftestx;};
+    G4double GetTestY() const    {return ftesty;};
+    G4double GetTestZ() const    {return ftestz;};
     ///
   private:
     // methods
@@ -107,7 +122,16 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
 
     G4VPhysicalVolume* boratedwater_PV;
     G4VPhysicalVolume* collimation_hole_PV;
-    //G4VPhysicalVolume* LabFloorWall_solid_PV;
+    G4VPhysicalVolume* Phantom_PV;
+    G4VPhysicalVolume* Phantom2_PV;
+    G4VPhysicalVolume* Phantom3_PV;
+    G4VPhysicalVolume* Phantom4_PV;
+    G4VPhysicalVolume* LabFloorWall_solid_PV;
+    G4VPhysicalVolume* LabFloorExtended_solid_PV;
+    G4VPhysicalVolume* frontglassdoor_PV;
+    G4VPhysicalVolume* frontdoor_PV;
+    G4VPhysicalVolume* glasswindow_PV;
+    G4VPhysicalVolume* reardoor_PV;
     G4VPhysicalVolume* TestSurface_solid_PV;
     G4VPhysicalVolume* multiplier_lead_PV;
     G4VPhysicalVolume* Test_RIGHTSIDE_PV;
@@ -145,6 +169,9 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4double  fModeratorAluminumHeight;
     G4double  fMultiplierLeadHeightFront;
     G4double  fModeratorTitaniumRadius;
+    G4double  ftestx;
+    G4double  ftesty;
+    G4double  ftestz;
 
     //
 
@@ -153,9 +180,29 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
 
 // inline functions
 
-//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorWallsolidPV() const {
-//  return LabFloorWall_solid_PV;
-//}
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorWallsolidPV() const {
+  return LabFloorWall_solid_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorExtendedsolidPV() const {
+  return LabFloorExtended_solid_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetfrontglassdoorPV() const {
+  return frontglassdoor_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetfrontdoorPV() const {
+  return frontdoor_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetglasswindowPV() const {
+  return glasswindow_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetreardoorPV() const {
+  return reardoor_PV;
+}
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestSurfacesolidPV() const {
   return TestSurface_solid_PV;
@@ -187,6 +234,22 @@ inline const G4VPhysicalVolume* IronFilterDetectorConstruction::Getfilterscandiu
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetcollimationholePV() const {
   return collimation_hole_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantomPV() const {
+  return Phantom_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom2PV() const {
+  return Phantom2_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom3PV() const {
+  return Phantom3_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom4PV() const {
+  return Phantom4_PV;
 }
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestTOPPV() const {

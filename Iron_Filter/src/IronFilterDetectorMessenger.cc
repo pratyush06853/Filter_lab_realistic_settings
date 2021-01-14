@@ -56,7 +56,11 @@ IronFilterDetectorMessenger::IronFilterDetectorMessenger(IronFilterDetectorConst
  ModeratorTitaniumHeightcmd(0),
  ModeratorAluminumHeightcmd(0),
  MultiplierLeadHeightFrontcmd(0),
- ModeratorTitaniumRadiuscmd(0)
+ ModeratorTitaniumRadiuscmd(0),
+ TestXcmd(0),
+ TestYcmd(0),
+ TestZcmd(0)
+
 
 {
   IronFilterDir = new G4UIdirectory("/IronFilter/");
@@ -146,6 +150,31 @@ IronFilterDetectorMessenger::IronFilterDetectorMessenger(IronFilterDetectorConst
   ModeratorTitaniumRadiuscmd->SetDefaultUnit("cm");
   ModeratorTitaniumRadiuscmd->AvailableForStates(G4State_PreInit);
 
+
+  TestXcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestX",this);
+  TestXcmd->SetGuidance("Set X position of the Human");
+  TestXcmd->SetParameterName("XPos",false);
+  TestXcmd->SetRange("XPos>0.");
+  TestXcmd->SetUnitCategory("Length");
+  TestXcmd->SetDefaultUnit("cm");
+  TestXcmd->AvailableForStates(G4State_PreInit);
+
+  TestYcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestY",this);
+  TestYcmd->SetGuidance("Set Y position of the Human");
+  TestYcmd->SetParameterName("YPos",false);
+  TestYcmd->SetRange("YPos>0.");
+  TestYcmd->SetUnitCategory("Length");
+  TestYcmd->SetDefaultUnit("cm");
+  TestYcmd->AvailableForStates(G4State_PreInit);
+
+  TestZcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestZ",this);
+  TestZcmd->SetGuidance("Set Z position of the Human");
+  TestZcmd->SetParameterName("ZPos",false);
+  TestZcmd->SetRange("ZPos>0.");
+  TestZcmd->SetUnitCategory("Length");
+  TestZcmd->SetDefaultUnit("cm");
+  TestZcmd->AvailableForStates(G4State_PreInit);
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -162,6 +191,9 @@ IronFilterDetectorMessenger::~IronFilterDetectorMessenger()
   delete ModeratorAluminumHeightcmd;
   delete MultiplierLeadHeightFrontcmd;
   delete ModeratorTitaniumRadiuscmd;
+  delete TestXcmd;
+  delete TestYcmd;
+  delete TestZcmd;
   delete DetDir;
   delete IronFilterDir;
 }
@@ -199,6 +231,15 @@ void IronFilterDetectorMessenger::SetNewValue(G4UIcommand* command,G4String newV
 
   if( command == ModeratorTitaniumRadiuscmd)
     { IronFilterDetector->SetModeratorTitaniumRadius(ModeratorTitaniumRadiuscmd->GetNewDoubleValue(newValue));}
+
+  if( command == TestXcmd)
+    { IronFilterDetector->SetTestX(TestXcmd->GetNewDoubleValue(newValue));}
+
+  if( command == TestYcmd)
+    { IronFilterDetector->SetTestY(TestYcmd->GetNewDoubleValue(newValue));}
+
+  if( command == TestZcmd)
+    { IronFilterDetector->SetTestZ(TestZcmd->GetNewDoubleValue(newValue));}
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

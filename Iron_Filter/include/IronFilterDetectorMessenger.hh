@@ -69,6 +69,9 @@ class IronFilterDetectorMessenger: public G4UImessenger
     G4UIcmdWithADoubleAndUnit* ModeratorAluminumHeightcmd;
     G4UIcmdWithADoubleAndUnit* MultiplierLeadHeightFrontcmd;
     G4UIcmdWithADoubleAndUnit* ModeratorTitaniumRadiuscmd;
+    G4UIcmdWithADoubleAndUnit* TestXcmd;
+    G4UIcmdWithADoubleAndUnit* TestYcmd;
+    G4UIcmdWithADoubleAndUnit* TestZcmd;
 
 
 };

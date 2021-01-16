@@ -30,8 +30,8 @@
 
 #include "IronFilterActionInitialization.hh"
 //#include "IronFilterPrimaryGeneratorAction.hh"
-#include "IronFilterGPSGeneratorAction.hh"
-//#include "IronFilterDTGeneratorAction.hh"
+//#include "IronFilterGPSGeneratorAction.hh"
+#include "IronFilterDTGeneratorAction.hh"
 #include "IronFilterRunAction.hh"
 #include "IronFilterEventAction.hh"
 #include "IronFilterSteppingAction.hh"
@@ -62,12 +62,12 @@ void IronFilterActionInitialization::BuildForMaster() const
 void IronFilterActionInitialization::Build() const
 {
   //SetUserAction(new IronFilterPrimaryGeneratorAction);
-  //SetUserAction(new IronFilterDTGeneratorAction);
-  SetUserAction(new IronFilterGPSGeneratorAction);
+  SetUserAction(new IronFilterDTGeneratorAction);
+  //SetUserAction(new IronFilterGPSGeneratorAction);
   SetUserAction(new IronFilterRunAction);
   IronFilterEventAction* eventAction = new IronFilterEventAction;
   SetUserAction(eventAction);
   SetUserAction(new IronFilterSteppingAction(fDetConstruction, eventAction));
-}  
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

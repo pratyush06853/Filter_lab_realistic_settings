@@ -154,7 +154,7 @@ IronFilterDetectorMessenger::IronFilterDetectorMessenger(IronFilterDetectorConst
   TestXcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestX",this);
   TestXcmd->SetGuidance("Set X position of the Human");
   TestXcmd->SetParameterName("XPos",false);
-  TestXcmd->SetRange("XPos>0.");
+  //TestXcmd->SetRange("XPos>0.");
   TestXcmd->SetUnitCategory("Length");
   TestXcmd->SetDefaultUnit("cm");
   TestXcmd->AvailableForStates(G4State_PreInit);
@@ -162,7 +162,7 @@ IronFilterDetectorMessenger::IronFilterDetectorMessenger(IronFilterDetectorConst
   TestYcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestY",this);
   TestYcmd->SetGuidance("Set Y position of the Human");
   TestYcmd->SetParameterName("YPos",false);
-  TestYcmd->SetRange("YPos>0.");
+  //TestYcmd->SetRange("YPos>0.");
   TestYcmd->SetUnitCategory("Length");
   TestYcmd->SetDefaultUnit("cm");
   TestYcmd->AvailableForStates(G4State_PreInit);
@@ -170,7 +170,7 @@ IronFilterDetectorMessenger::IronFilterDetectorMessenger(IronFilterDetectorConst
   TestZcmd= new G4UIcmdWithADoubleAndUnit("/IronFilter/det/setTestZ",this);
   TestZcmd->SetGuidance("Set Z position of the Human");
   TestZcmd->SetParameterName("ZPos",false);
-  TestZcmd->SetRange("ZPos>0.");
+  //TestZcmd->SetRange("ZPos>0.");
   TestZcmd->SetUnitCategory("Length");
   TestZcmd->SetDefaultUnit("cm");
   TestZcmd->AvailableForStates(G4State_PreInit);

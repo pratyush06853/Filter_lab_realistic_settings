@@ -82,14 +82,18 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
    filter_scandium_PV(0),
    collimation_hole_PV(0),
    Phantom_PV(0),
-   Phantom2_PV(0),
-   Phantom3_PV(0),
-   Phantom4_PV(0),
+   //Phantom2_PV(0),
+   //Phantom3_PV(0),
+   //Phantom4_PV(0),
+   ////Phantom5_PV(0),
+   //Phantom6_PV(0),
+   //Phantom7_PV(0),
+   //Phantom8_PV(0),
    Test_RIGHTSIDE_PV(0),
    Test_REARSIDE_PV(0),
    inner_BPoly_PV(0),
    Test_FRONTSIDE_PV(0),
-   Test_CENTERPOINT_PV(0),
+   //Test_CENTERPOINT_PV(0),
    Test_TOP_PV(0),
    Test_BOTTOM_PV(0),
    Test_LEFTSIDE_PV(0),
@@ -117,9 +121,9 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
 
   fFilterCellSpacing= 50.0*cm;//5
 
-  ftestx = 4.5*m;
-  ftesty = 4.5*m;
-  ftestz = 4.5*m;
+  ftestx = 8*m;
+  ftesty = 8*m;
+  ftestz = 8*m;
 
 
 
@@ -338,48 +342,57 @@ void IronFilterDetectorConstruction::DefineMaterials()
   //boratedPoly->AddElement(NatH,  14.424*perCent);
   //boratedPoly->AddElement(NatC,  82.576*perCent);
   //boratedPoly->AddElement(NatB,  3.00*perCent);
-  G4Material*soft_tissue = new G4Material("soft_tissue",density= 0.9869*g/cm3,nComponents=16);
-  soft_tissue->AddElement(TS_H_P,0.1047*perCent);
-  soft_tissue->AddElement(elC,0.2302*perCent);
-  soft_tissue->AddElement(elN,0.0234*perCent);
-  soft_tissue->AddElement(elO,0.6321*perCent);
-  soft_tissue->AddElement(elNa,0.0013*perCent);
-  soft_tissue->AddElement(elMg,0.00015*perCent);
-  soft_tissue->AddElement(elP,0.0024*perCent);
-  soft_tissue->AddElement(elS,0.0022*perCent);
-  soft_tissue->AddElement(elCl,0.0014*perCent);
-  soft_tissue->AddElement(elK,0.0021*perCent);
-  soft_tissue->AddElement(elFe,0.000063*perCent);
-  soft_tissue->AddElement(elZn,0.000032*perCent);
-  soft_tissue->AddElement(elRb,0.0000057*perCent);
-  soft_tissue->AddElement(elSr,0.00000034*perCent);
-  soft_tissue->AddElement(elZr,0.000008*perCent);
-  soft_tissue->AddElement(elPb,0.00000016*perCent);
+  G4Material*soft_tissue = new G4Material("soft_tissue",density= 0.9869*g/cm3,nComponents=9);
+  //soft_tissue->AddElement(TS_H_P,0.1047*perCent);
+  //soft_tissue->AddElement(elC,0.2302*perCent);
+  //soft_tissue->AddElement(elN,0.0234*perCent);
+  //soft_tissue->AddElement(elO,0.6321*perCent);
+  //soft_tissue->AddElement(elNa,0.0013*perCent);
+  //soft_tissue->AddElement(elMg,0.00015*perCent);
+  //soft_tissue->AddElement(elP,0.0024*perCent);
+  //soft_tissue->AddElement(elS,0.0022*perCent);
+  //soft_tissue->AddElement(elCl,0.0014*perCent);
+  //soft_tissue->AddElement(elK,0.0021*perCent);
+  //soft_tissue->AddElement(elFe,0.000063*perCent);
+  //soft_tissue->AddElement(elZn,0.000032*perCent);
+  //soft_tissue->AddElement(elRb,0.0000057*perCent);
+  //soft_tissue->AddElement(elSr,0.00000034*perCent);
+  //soft_tissue->AddElement(elZr,0.000008*perCent);
+  //soft_tissue->AddElement(elPb,0.00000016*perCent);
+  soft_tissue->AddElement(elH,0.105);
+  soft_tissue->AddElement(elC,0.256);
+  soft_tissue->AddElement(elN,0.027);
+  soft_tissue->AddElement(elO,0.602);
+  soft_tissue->AddElement(elNa,0.001);
+  soft_tissue->AddElement(elP,0.002);
+  soft_tissue->AddElement(elS,0.003);
+  soft_tissue->AddElement(elCl,0.002);
+  soft_tissue->AddElement(elK,0.002);
 
 
   //soil
   G4Material*soil = new G4Material("soil",density= 1.50*g/cm3,nComponents=8);
-  soil->AddElement(elH,0.021*perCent);
-  soil->AddElement(elC,0.016*perCent);
-  soil->AddElement(elO,0.577*perCent);
-  soil->AddElement(elAl,0.050*perCent);
-  soil->AddElement(elSi,0.271*perCent);
-  soil->AddElement(elK,0.013*perCent);
-  soil->AddElement(elCa,0.041*perCent);
-  soil->AddElement(elFe,0.011*perCent);
+  soil->AddElement(elH,0.021);
+  soil->AddElement(elC,0.016);
+  soil->AddElement(elO,0.577);
+  soil->AddElement(elAl,0.050);
+  soil->AddElement(elSi,0.271);
+  soil->AddElement(elK,0.013);
+  soil->AddElement(elCa,0.041);
+  soil->AddElement(elFe,0.011);
 
   //concrete
   G4Material*concrete = new G4Material("concrete",density= 2.3*g/cm3,nComponents=10);
-  concrete->AddElement(elH,0.01*perCent);
-  concrete->AddElement(elC,0.001*perCent);
-  concrete->AddElement(elO,0.529107*perCent);
-  concrete->AddElement(elNa,0.016*perCent);
-  concrete->AddElement(elMg,0.002*perCent);
-  concrete->AddElement(elAl,0.033872*perCent);
-  concrete->AddElement(elSi,0.337021*perCent);
-  concrete->AddElement(elK,0.013*perCent);
-  concrete->AddElement(elCa,0.044*perCent);
-  concrete->AddElement(elFe,0.014*perCent);
+  concrete->AddElement(elH,0.01);
+  concrete->AddElement(elC,0.001);
+  concrete->AddElement(elO,0.529107);
+  concrete->AddElement(elNa,0.016);
+  concrete->AddElement(elMg,0.002);
+  concrete->AddElement(elAl,0.033872);
+  concrete->AddElement(elSi,0.337021);
+  concrete->AddElement(elK,0.013);
+  concrete->AddElement(elCa,0.044);
+  concrete->AddElement(elFe,0.014);
 
 
   // Print materials
@@ -463,8 +476,9 @@ G4ThreeVector position_of_origin = {2.7*m, -2.45*m, 1.3*m}; //with repect to the
 
 G4ThreeVector xyposition_of_origin = {2.7*m, -2.45*m, 0};
 
-G4double Phantom_Radius=0.5*m;
+G4double Phantom_Radius=0.4*m;
 G4double Phantom_Height=2.0*m;
+G4double Phantom_Size=0.25*m;
 
 
 //
@@ -516,6 +530,7 @@ G4double Phantom_Height=2.0*m;
   G4VSolid* LabFloorExtended_solid_S=  new G4Box("LabFloorExtended_solid", 15.0*m, 15.0*m , 15.0*m);
   //G4SubtractionSolid* Main_2a_S= new G4SubtractionSolid("Main_2a_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
   G4LogicalVolume* LabFloorExtended_solid_LV = new G4LogicalVolume(LabFloorExtended_solid_S, Soil, "LabFloorExtended_solid");
+  //G4LogicalVolume* LabFloorExtended_solid_LV = new G4LogicalVolume(LabFloorExtended_solid_S, Vacuum, "LabFloorExtended_solid");
   LabFloorExtended_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin-G4ThreeVector(0., 0., lab68_wall_z/2.0+15.0*m), LabFloorExtended_solid_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
   //LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
   LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
@@ -659,40 +674,53 @@ G4double Phantom_Height=2.0*m;
   Test_FRONTSIDE_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
   //At the center
-  G4VSolid* Test_CENTERPOINT_S = new G4Box("Test_CENTERPOINT_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
-  G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
-  Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
-  Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
+  //G4VSolid* Test_CENTERPOINT_S = new G4Box("Test_CENTERPOINT_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
+  //G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
+  //Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
+  G4ThreeVector Origin_DT=G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
+                  +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.);
 
-  G4ThreeVector Phantom_Placement= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
-                                      +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.)
-                                            +G4ThreeVector(ftestx, ftesty, 0);
+  G4double assymetric_factor_positivey=Water_rear_side+fMultiplierLeadHeightRear;
+  G4double assymetric_factor_negativey=NeutronFilter_length-fMultiplierLeadHeightRear;
 
-  G4ThreeVector Phantom_Placement_2= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
-                                      +G4ThreeVector(0.,NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.0)
-                                            +G4ThreeVector(-ftestx, -ftesty, 0);
-
-  G4ThreeVector Phantom_Placement_3= G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
-                                        +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.)
-                                                +G4ThreeVector(ftestx, -ftesty, 0);
-
-  G4ThreeVector Phantom_Placement_4= G4ThreeVector(lab68_wall_x/2.0,-lab68_wall_y/2.0, 0)-xyposition_of_origin;
-  //G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
-  //                                       +G4ThreeVector(0., 0.,NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0)
-  //                                               +G4ThreeVector(-ftestx, ftesty, 0);
+  G4ThreeVector Phantom_Placement=  Origin_DT + G4ThreeVector(ftestx, ftesty, 0);
+  //G4ThreeVector Phantom_Placement=  Origin_DT + G4ThreeVector(ftestx+Water_x/2.0, 0, ftestz);
+  ////G4ThreeVector Phantom_Placement_2= Origin_DT + G4ThreeVector(-ftestx, -ftesty, 0);
+  //G4ThreeVector Phantom_Placement_2= Origin_DT + G4ThreeVector(-ftestx-Water_x/2.0, 0, ftestz);
+  ////G4ThreeVector Phantom_Placement_3= Origin_DT + G4ThreeVector(ftestx, -ftesty, 0);
+  //G4ThreeVector Phantom_Placement_3= Origin_DT + G4ThreeVector(0, -ftesty-assymetric_factor_negativey, ftestz);
+  ////G4ThreeVector Phantom_Placement_4= Origin_DT + G4ThreeVector(-ftestx, ftesty, 0);
+  //G4ThreeVector Phantom_Placement_4= Origin_DT + G4ThreeVector(0, ftesty+assymetric_factor_positivey, ftestz);
+  ////G4ThreeVector Phantom_Placement_5= G4ThreeVector(lab68_wall_x/2.0,-lab68_wall_y/2.0, 0) - xyposition_of_origin;
+  //G4ThreeVector Phantom_Placement_5= Origin_DT + G4ThreeVector(ftestx+Water_x/2.0, ftesty+assymetric_factor_positivey, ftestz);
+  //G4ThreeVector Phantom_Placement_6= Origin_DT + G4ThreeVector(-ftestx-Water_x/2.0, ftesty+assymetric_factor_positivey, ftestz);
+  //G4ThreeVector Phantom_Placement_7= Origin_DT + G4ThreeVector(ftestx+Water_x/2.0, -ftesty-assymetric_factor_negativey, ftestz);
+  //G4ThreeVector Phantom_Placement_8= Origin_DT + G4ThreeVector(-ftestx-Water_x/2.0, -ftesty-assymetric_factor_negativey, ftestz);
 
   // Poly need to change
-  G4VSolid* Phantom_S = new G4Tubs("Phantom", zeroRadius, Phantom_Radius/2.0, Phantom_Height/2.0, startAngle, spanningAngle);
+  //G4VSolid* Phantom_S = new G4Tubs("Phantom", zeroRadius, Phantom_Radius/2.0, Phantom_Height/2.0, startAngle, spanningAngle);
+  G4VSolid* Phantom_S = new G4Box("Phantom",Phantom_Size/2.0, Phantom_Size/2.0, Phantom_Size/2.0-delta);
   //G4LogicalVolume* Phantom_LV = new G4LogicalVolume(Phantom_S, Air, "Phantom");
   G4LogicalVolume* Phantom_LV = new G4LogicalVolume(Phantom_S, Soft_Tissue, "Phantom");
   Phantom_PV = new G4PVPlacement(NO_ROT, Phantom_Placement, Phantom_LV, "Phantom", vacuum_solid_LV, false, 0, fCheckOverlaps);
 
-  Phantom2_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_2, Phantom_LV, "Phantom2", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //Phantom2_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_2, Phantom_LV, "Phantom2", vacuum_solid_LV, false, 0, fCheckOverlaps);
 
-  Phantom3_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_3, Phantom_LV, "Phantom3", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //Phantom3_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_3, Phantom_LV, "Phantom3", vacuum_solid_LV, false, 0, fCheckOverlaps);
 
-  Phantom4_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_4, Phantom_LV, "Phantom3", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //Phantom4_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_4, Phantom_LV, "Phantom4", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  ////Phantom5_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_5, Phantom_LV, "Phantom5", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  //Phantom6_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_6, Phantom_LV, "Phantom6", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  //Phantom7_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_7, Phantom_LV, "Phantom7", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+  //Phantom8_PV = new G4PVPlacement(NO_ROT, Phantom_Placement_8, Phantom_LV, "Phantom8", vacuum_solid_LV, false, 0, fCheckOverlaps);
+
+
 
   Phantom_LV->SetVisAttributes(G4VisAttributes(G4Colour::Green()));
 
@@ -811,30 +839,15 @@ void IronFilterDetectorConstruction::SetModeratorTitaniumRadius(G4double ival)
 
 void IronFilterDetectorConstruction::SetTestX(G4double ival)
 {
-  if (ival < 1)
-    { G4cout << "\n --->warning from Setftestx: "
-             << ival << " must be at least 1. Command refused" << G4endl;
-      return;
-    }
   ftestx = ival;
 }
 
 void IronFilterDetectorConstruction::SetTestY(G4double ival)
 {
-  if (ival < 1)
-    { G4cout << "\n --->warning from Setftesty: "
-             << ival << " must be at least 1. Command refused" << G4endl;
-      return;
-    }
   ftesty = ival;
 }
 
 void IronFilterDetectorConstruction::SetTestZ(G4double ival)
 {
-  if (ival < 1)
-    { G4cout << "\n --->warning from Setftestz: "
-             << ival << " must be at least 1. Command refused" << G4endl;
-      return;
-    }
   ftestz = ival;
 }

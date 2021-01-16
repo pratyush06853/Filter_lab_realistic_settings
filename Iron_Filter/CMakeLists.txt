@@ -19,6 +19,26 @@ else()
 endif()
 
 #----------------------------------------------------------------------------
+# Find ROOT
+IF(NOT DEFINED ROOT_FOUND)
+  message("Root not found... Let's try Find_package ;)")
+  find_package(ROOT 6.18 CONFIG REQUIRED)
+  #find_package(ROOT COMPONENTS MathMore Matrix Hist Tree Graf Gpad)
+  IF(NOT ${ROOT_FOUND})
+      message("Root not found... have to try an other way ;)")
+      include($ENV{ROOTSYS}/etc/root/cmake/FindROOT.cmake)
+    include_directories( PUBLIC ${ROOT_INCLUDE_DIRS})
+    link_libraries( ${ROOT_LIBRARIES})
+  ELSE(NOT ${ROOT_FOUND})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ROOT_CXX_FLAGS}")
+      include(${ROOT_USE_FILE})
+    include_directories(PUBLIC ${ROOT_INCLUDE_DIRS})
+    link_libraries( ${ROOT_LIBRARIES})
+  ENDIF()
+ENDIF()
+#-----------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 # Setup include directory for this project
 #

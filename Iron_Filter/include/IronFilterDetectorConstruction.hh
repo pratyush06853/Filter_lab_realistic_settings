@@ -70,9 +70,13 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     const G4VPhysicalVolume* GetboratedwaterPV() const;
     const G4VPhysicalVolume* GetcollimationholePV() const;
     const G4VPhysicalVolume* GetPhantomPV() const;
-    const G4VPhysicalVolume* GetPhantom2PV() const;
-    const G4VPhysicalVolume* GetPhantom3PV() const;
-    const G4VPhysicalVolume* GetPhantom4PV() const;
+    //const G4VPhysicalVolume* GetPhantom2PV() const;
+    //const G4VPhysicalVolume* GetPhantom3PV() const;
+    //const G4VPhysicalVolume* GetPhantom4PV() const;
+    ////const G4VPhysicalVolume* GetPhantom5PV() const;
+    //const G4VPhysicalVolume* GetPhantom6PV() const;
+    //const G4VPhysicalVolume* GetPhantom7PV() const;
+    //const G4VPhysicalVolume* GetPhantom8PV() const;
     const G4VPhysicalVolume* GetLabFloorWallsolidPV() const;
     const G4VPhysicalVolume* GetLabFloorExtendedsolidPV() const;
     const G4VPhysicalVolume* GetfrontglassdoorPV() const;
@@ -90,7 +94,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     const G4VPhysicalVolume* GetTestREARSIDEPV() const;
     const G4VPhysicalVolume* GetinnerBPolyPV() const;
     const G4VPhysicalVolume* GetTestFRONTSIDEPV() const;
-    const G4VPhysicalVolume* GetTestCENTERPOINTPV() const;
+    //const G4VPhysicalVolume* GetTestCENTERPOINTPV() const;
     const G4VPhysicalVolume* GetfilterscandiumPV() const; //Test_LEFTSIDE
     //const G4VPhysicalVolume* GetLiFsolidPV() const;
 
@@ -123,9 +127,13 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* boratedwater_PV;
     G4VPhysicalVolume* collimation_hole_PV;
     G4VPhysicalVolume* Phantom_PV;
-    G4VPhysicalVolume* Phantom2_PV;
-    G4VPhysicalVolume* Phantom3_PV;
-    G4VPhysicalVolume* Phantom4_PV;
+    //G4VPhysicalVolume* Phantom2_PV;
+    //G4VPhysicalVolume* Phantom3_PV;
+    //G4VPhysicalVolume* Phantom4_PV;
+    ////G4VPhysicalVolume* Phantom5_PV;
+    //G4VPhysicalVolume* Phantom6_PV;
+    //G4VPhysicalVolume* Phantom7_PV;
+    //G4VPhysicalVolume* Phantom8_PV;
     G4VPhysicalVolume* LabFloorWall_solid_PV;
     G4VPhysicalVolume* LabFloorExtended_solid_PV;
     G4VPhysicalVolume* frontglassdoor_PV;
@@ -144,7 +152,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* Test_REARSIDE_PV;
     G4VPhysicalVolume* inner_BPoly_PV;
     G4VPhysicalVolume* Test_FRONTSIDE_PV;
-    G4VPhysicalVolume* Test_CENTERPOINT_PV;
+    //G4VPhysicalVolume* Test_CENTERPOINT_PV;
     G4VPhysicalVolume* filter_scandium_PV;
 
 
@@ -240,17 +248,33 @@ inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantomPV() c
   return Phantom_PV;
 }
 
-inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom2PV() const {
-  return Phantom2_PV;
-}
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom2PV() const {
+//  return Phantom2_PV;
+//}
 
-inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom3PV() const {
-  return Phantom3_PV;
-}
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom3PV() const {
+//  return Phantom3_PV;
+//}
 
-inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom4PV() const {
-  return Phantom4_PV;
-}
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom4PV() const {
+//  return Phantom4_PV;
+//}
+
+////inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom5PV() const {
+////  return Phantom5_PV;
+////}
+
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom6PV() const {
+//  return Phantom6_PV;
+//}
+
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom7PV() const {
+//  return Phantom7_PV;
+//}
+
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetPhantom8PV() const {
+//  return Phantom8_PV;
+//}
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestTOPPV() const {
   return Test_TOP_PV;
@@ -276,9 +300,9 @@ inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestFRONTSIDE
   return Test_FRONTSIDE_PV;
 }
 
-inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestCENTERPOINTPV() const {
-  return Test_CENTERPOINT_PV;
-}
+//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestCENTERPOINTPV() const {
+//  return Test_CENTERPOINT_PV;
+//}
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

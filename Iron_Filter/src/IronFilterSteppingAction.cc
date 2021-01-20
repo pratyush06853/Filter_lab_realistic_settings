@@ -167,14 +167,9 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
 
                // TODO: turn this into a tree that gets filled 2112 neutrons
                //if( (particle_ID == 2112 || particle_ID == 22) ){
-               if( step->GetTotalEnergyDeposit() ){
-               //if( particle_ID == 2112 && (test_volumeID == 2 || test_volumeID == 3)  ){
-                   //analysisManager->FillNtupleIColumn(0, eventID);
-                   //analysisManager->FillNtupleIColumn(0, trackID);
-                   //analysisManager->FillNtupleIColumn(1, stepID);
-                   //analysisManager->FillNtupleIColumn(0, particle_ID);
                    //G4cout<<eventID<<"     "<<trackID<<"      "<<particle_ID<<"      "<<test_volumeID<<G4endl;
-                   analysisManager->FillNtupleDColumn(0, step->GetTotalEnergyDeposit());
+                   //analysisManager->FillNtupleDColumn(0, step->GetTotalEnergyDeposit());
+                   analysisManager->FillNtupleDColumn(0, energy);
                    analysisManager->FillNtupleDColumn(1, track->GetPosition().x());
                    analysisManager->FillNtupleDColumn(2, track->GetPosition().y());
                    analysisManager->FillNtupleDColumn(3, track->GetPosition().z());
@@ -188,7 +183,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                    analysisManager->FillNtupleIColumn(11, trackID);
                    analysisManager->FillNtupleIColumn(12, stepID);
                    analysisManager->AddNtupleRow();
-               } //close if statement
+               //} //close if statement
 
          }
 }

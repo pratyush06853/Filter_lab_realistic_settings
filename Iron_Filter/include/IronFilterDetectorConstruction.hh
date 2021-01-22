@@ -78,6 +78,11 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     //const G4VPhysicalVolume* GetPhantom7PV() const;
     //const G4VPhysicalVolume* GetPhantom8PV() const;
     const G4VPhysicalVolume* GetLabFloorWallsolidPV() const;
+    const G4VPhysicalVolume* Getlab70FloorWallsolidPV() const;
+    const G4VPhysicalVolume* GetLab32FloorWallsolidPV() const;
+    const G4VPhysicalVolume* Getlab66FloorWallsolidPV() const;
+    const G4VPhysicalVolume* Getlab30FloorWallsolidPV() const;
+    const G4VPhysicalVolume* Getlab28FloorWallsolidPV() const;
     const G4VPhysicalVolume* GetLabFloorExtendedsolidPV() const;
     const G4VPhysicalVolume* GetfrontglassdoorPV() const;
     const G4VPhysicalVolume* GetfrontdoorPV() const;
@@ -135,6 +140,11 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     //G4VPhysicalVolume* Phantom7_PV;
     //G4VPhysicalVolume* Phantom8_PV;
     G4VPhysicalVolume* LabFloorWall_solid_PV;
+    G4VPhysicalVolume* lab70FloorWall_solid_PV;
+    G4VPhysicalVolume* lab66FloorWall_solid_PV;
+    G4VPhysicalVolume* lab30FloorWall_solid_PV;
+    G4VPhysicalVolume* lab28FloorWall_solid_PV;
+    G4VPhysicalVolume* Lab32FloorWall_solid_PV;
     G4VPhysicalVolume* LabFloorExtended_solid_PV;
     G4VPhysicalVolume* frontglassdoor_PV;
     G4VPhysicalVolume* frontdoor_PV;
@@ -190,6 +200,28 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorWallsolidPV() const {
   return LabFloorWall_solid_PV;
+}
+
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::Getlab70FloorWallsolidPV() const {
+  return lab70FloorWall_solid_PV;
+}
+
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::Getlab66FloorWallsolidPV() const {
+  return lab66FloorWall_solid_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::Getlab30FloorWallsolidPV() const {
+  return lab30FloorWall_solid_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::Getlab28FloorWallsolidPV() const {
+  return lab28FloorWall_solid_PV;
+}
+
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLab32FloorWallsolidPV() const {
+  return Lab32FloorWall_solid_PV;
 }
 
 inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetLabFloorExtendedsolidPV() const {

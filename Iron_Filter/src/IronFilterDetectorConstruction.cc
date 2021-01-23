@@ -464,7 +464,7 @@ G4double lab68_wall_x = 6.6*m ;
 G4double lab68_wall_y = 9.3*m ;
 G4double lab68_wall_z = 5.6*m ;
 
-G4double Pump_chase_y = 2.5*m ;
+G4double Pump_chase_y = 2.9*m ;
 
 G4double lab68_frontdoor_glass_height = 2.9*m;
 G4double lab68_frontdoor_glass_width = 2.2*m;

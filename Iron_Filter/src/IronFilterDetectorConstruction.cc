@@ -127,9 +127,9 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
 
   fFilterCellSpacing= 50.0*cm;//5
 
-  ftestx = 8*m;
-  ftesty = 8*m;
-  ftestz = 8*m;
+  ftestx = 0*m;
+  ftesty = 15*m;
+  ftestz = -2.0*m;
 
 
 
@@ -724,7 +724,7 @@ G4double Phantom_Size=0.25*m;
   G4double assymetric_factor_positivey=Water_rear_side+fMultiplierLeadHeightRear;
   G4double assymetric_factor_negativey=NeutronFilter_length-fMultiplierLeadHeightRear;
 
-  G4ThreeVector Phantom_Placement=  Origin_DT + G4ThreeVector(ftestx, ftesty, 0);
+  G4ThreeVector Phantom_Placement=  Origin_DT + G4ThreeVector(ftestx, ftesty, ftestz);
   //G4ThreeVector Phantom_Placement=  Origin_DT + G4ThreeVector(ftestx+Water_x/2.0, 0, ftestz);
   ////G4ThreeVector Phantom_Placement_2= Origin_DT + G4ThreeVector(-ftestx, -ftesty, 0);
   //G4ThreeVector Phantom_Placement_2= Origin_DT + G4ThreeVector(-ftestx-Water_x/2.0, 0, ftestz);

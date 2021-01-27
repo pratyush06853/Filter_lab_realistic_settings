@@ -487,8 +487,8 @@ G4ThreeVector xyposition_of_origin = {2.7*m, -2.45*m, 0};
 
 G4double Phantom_Radius=0.4*m;
 G4double Phantom_Height=2.0*m;
-G4double Phantom_Size=0.25*m;
-
+//G4double Phantom_Size=0.25*m;
+G4double Phantom_Size=0.25*m/2.0;
 
 //
 // Rotations
@@ -764,6 +764,7 @@ G4double Phantom_Size=0.25*m;
 
 
   Phantom_LV->SetVisAttributes(G4VisAttributes(G4Colour::Green()));
+  //Phantom_LV->SetVisAttributes(G4VisAttributes::Invisible);
 
 
   //Lab donot include ceiling
@@ -774,6 +775,12 @@ G4double Phantom_Size=0.25*m;
   LabFloorExtended_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin-G4ThreeVector(0., 0., lab68_wall_z/2.0+15.0*m), LabFloorExtended_solid_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
   LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
   //LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
+
+
+  //G4VSolid* Boundary_S=  new G4Box("Boundary", 15.0*m, 15.0*m , 0.3*m);
+  //G4LogicalVolume* Boundary_LV = new G4LogicalVolume(Boundary_S, Soil, "Boundary");
+  //new G4PVPlacement(turnAlong, Origin_DT + G4ThreeVector(0, 0, 10*m), Boundary_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //Boundary_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
 
 
 

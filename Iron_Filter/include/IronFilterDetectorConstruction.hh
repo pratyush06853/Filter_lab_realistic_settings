@@ -99,7 +99,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     const G4VPhysicalVolume* GetTestREARSIDEPV() const;
     const G4VPhysicalVolume* GetinnerBPolyPV() const;
     const G4VPhysicalVolume* GetTestFRONTSIDEPV() const;
-    //const G4VPhysicalVolume* GetTestCENTERPOINTPV() const;
+    const G4VPhysicalVolume* GetTestCENTERPOINTPV() const;
     const G4VPhysicalVolume* GetfilterscandiumPV() const; //Test_LEFTSIDE
     //const G4VPhysicalVolume* GetLiFsolidPV() const;
 
@@ -162,7 +162,7 @@ class IronFilterDetectorConstruction : public G4VUserDetectorConstruction
     G4VPhysicalVolume* Test_REARSIDE_PV;
     G4VPhysicalVolume* inner_BPoly_PV;
     G4VPhysicalVolume* Test_FRONTSIDE_PV;
-    //G4VPhysicalVolume* Test_CENTERPOINT_PV;
+    G4VPhysicalVolume* Test_CENTERPOINT_PV;
     G4VPhysicalVolume* filter_scandium_PV;
 
 
@@ -332,9 +332,9 @@ inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestFRONTSIDE
   return Test_FRONTSIDE_PV;
 }
 
-//inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestCENTERPOINTPV() const {
-//  return Test_CENTERPOINT_PV;
-//}
+inline const G4VPhysicalVolume* IronFilterDetectorConstruction::GetTestCENTERPOINTPV() const {
+  return Test_CENTERPOINT_PV;
+}
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

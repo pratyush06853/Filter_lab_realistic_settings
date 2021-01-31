@@ -78,12 +78,12 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
         G4int test_volumeID;
         G4int flag=0;
 
-        //if(volume == fDetConstruction->GetTestCENTERPOINTPV()){
-        //  test_volumeID = 0;
-        //  flag=0;
-        // }
-        //else if(volume == fDetConstruction->GetTestFRONTSIDEPV()){
-        if(volume == fDetConstruction->GetTestFRONTSIDEPV()){
+        if(volume == fDetConstruction->GetTestCENTERPOINTPV()){
+          test_volumeID = 0;
+          flag=1;
+         }
+        else if(volume == fDetConstruction->GetTestFRONTSIDEPV()){
+        //if(volume == fDetConstruction->GetTestFRONTSIDEPV()){
            test_volumeID = 1;
            flag=0;
         }
@@ -113,7 +113,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
         }
         else if(volume == fDetConstruction->GetPhantomPV()){
           test_volumeID = 8;
-          flag=1;
+          flag=0;
         }
         //else if(volume == fDetConstruction->GetPhantom2PV()){
         //  test_volumeID = 9;
@@ -144,7 +144,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
         //  flag=1;
         //}
         else {
-          test_volumeID =8;
+          test_volumeID =10;
           flag=0;
         }
 
@@ -166,7 +166,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                G4int particle_ID = track->GetParticleDefinition()->GetPDGEncoding();
 
                // TODO: turn this into a tree that gets filled 2112 neutrons
-               //if( (particle_ID == 2112 || particle_ID == 22) ){
+               if( (particle_ID == 2112 || particle_ID == 22) ){
                    //G4cout<<eventID<<"     "<<trackID<<"      "<<particle_ID<<"      "<<test_volumeID<<G4endl;
                    //analysisManager->FillNtupleDColumn(0, step->GetTotalEnergyDeposit());
                    analysisManager->FillNtupleDColumn(0, energy);
@@ -183,7 +183,7 @@ void IronFilterSteppingAction::UserSteppingAction(const G4Step* step)
                    analysisManager->FillNtupleIColumn(11, trackID);
                    analysisManager->FillNtupleIColumn(12, stepID);
                    analysisManager->AddNtupleRow();
-               //} //close if statement
+               } //close if statement
 
          }
 }

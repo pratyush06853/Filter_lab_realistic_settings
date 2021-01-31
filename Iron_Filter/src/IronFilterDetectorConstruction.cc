@@ -99,7 +99,7 @@ IronFilterDetectorConstruction::IronFilterDetectorConstruction()
    Test_REARSIDE_PV(0),
    inner_BPoly_PV(0),
    Test_FRONTSIDE_PV(0),
-   //Test_CENTERPOINT_PV(0),
+   Test_CENTERPOINT_PV(0),
    Test_TOP_PV(0),
    Test_BOTTOM_PV(0),
    Test_LEFTSIDE_PV(0),
@@ -713,10 +713,10 @@ G4double Phantom_Size=0.25*m/2.0;
   Test_FRONTSIDE_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
   //At the center
-  //G4VSolid* Test_CENTERPOINT_S = new G4Box("Test_CENTERPOINT_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
-  //G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
-  //Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
-  //Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
+  G4VSolid* Test_CENTERPOINT_S = new G4Box("Test_CENTERPOINT_solid", Water_x/2.0, delta/2.0, Water_z/2.0);
+  G4LogicalVolume *Test_CENTERPOINT_LV = new G4LogicalVolume(Test_CENTERPOINT_S, Vacuum,"Test_CENTERPOINT" );
+  Test_CENTERPOINT_PV = new G4PVPlacement(turnAlongZ, G4ThreeVector(0., 0., 0.), Test_CENTERPOINT_LV, "Test_CENTERPOINT", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  Test_CENTERPOINT_LV->SetVisAttributes(G4VisAttributes(G4Colour::Yellow()));
 
   G4ThreeVector Origin_DT=G4ThreeVector(0., fFilterCellSpacing+NeutronFilter_length/2.0, 0.)
                   +G4ThreeVector(0., NeutronFilter_length/2.0-(fMultiplierLeadHeightRear+fMultiplierLeadHeightFront)/2.0,0.);
@@ -768,18 +768,22 @@ G4double Phantom_Size=0.25*m/2.0;
 
 
   //Lab donot include ceiling
-  G4VSolid* LabFloorExtended_solid_S=  new G4Box("LabFloorExtended_solid", 25.0*m, 25.0*m , 15.0*m);
+  G4double soil_width=2*m;
+  //G4VSolid* LabFloorExtended_solid_S=  new G4Box("LabFloorExtended_solid", 25.0*m, 25.0*m , 15.0*m);
+  G4VSolid* LabFloorExtended_solid_S=  new G4Box("LabFloorExtended_solid", 20.0*m, 20.0*m , soil_width/2.0);
   //G4SubtractionSolid* Main_2a_S= new G4SubtractionSolid("Main_2a_solid", Main_2_S, hole_2_S, NO_ROT, G4ThreeVector(0.,0., 0.));
   G4LogicalVolume* LabFloorExtended_solid_LV = new G4LogicalVolume(LabFloorExtended_solid_S, Soil, "LabFloorExtended_solid");
   //G4LogicalVolume* LabFloorExtended_solid_LV = new G4LogicalVolume(LabFloorExtended_solid_S, Vacuum, "LabFloorExtended_solid");
-  LabFloorExtended_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin-G4ThreeVector(0., 0., lab68_wall_z/2.0+15.0*m), LabFloorExtended_solid_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  LabFloorExtended_solid_PV = new G4PVPlacement(turnAlong, G4ThreeVector{lab68_wall_x/2.0,-lab68_wall_y/2.0,lab68_wall_z/2.0}-position_of_origin-G4ThreeVector(0., 0., lab68_wall_z/2.0+soil_width/2.0), LabFloorExtended_solid_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
   LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
   //LabFloorExtended_solid_LV->SetVisAttributes(G4VisAttributes::Invisible);
 
 
-  //G4VSolid* Boundary_S=  new G4Box("Boundary", 15.0*m, 15.0*m , 0.3*m);
+  //G4VSolid* Boundary_S=  new G4Box("Boundary", 0.3*m, 5.0*m , 5.0*m);
+  //G4VSolid* Boundary_S = new G4Tubs("Boundary", zeroRadius, fMultiplierLeadRadius , 1.0*cm, startAngle, spanningAngle);
   //G4LogicalVolume* Boundary_LV = new G4LogicalVolume(Boundary_S, Soil, "Boundary");
-  //new G4PVPlacement(turnAlong, Origin_DT + G4ThreeVector(0, 0, 10*m), Boundary_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
+  //G4LogicalVolume* Boundary_LV = new G4LogicalVolume(Boundary_S, Vacuum, "Boundary");
+  //new G4PVPlacement(turnAlongX, G4ThreeVector(0, 0, 0), Boundary_LV, "LabFloor_extended", vacuum_solid_LV, false, 0, fCheckOverlaps);
   //Boundary_LV->SetVisAttributes(G4VisAttributes(G4Colour::Brown()));
 
 
